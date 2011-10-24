@@ -1,6 +1,7 @@
 
 var imagefolder='http://digiformspot.etek.dk/books/';
 
+
 function go(isbn) {
 // kaldes fra flashen 
   titel='Dummy';
@@ -75,15 +76,9 @@ $(document).ready(function(){
   // submit
 	  $("form").submit(function() {
 
-      // check på data
-      if ( this.param1.value.length==0 ){
-         this.param1.focus();
-         $('#result').html('Skriv dit navn');		
-         return false;
-      }
       // meget simpel emailvalidering
-      if ( this.param2.value.search(/.*@.*/) == -1 ) {
-         this.param2.focus();
+      if ( this.param1.value.search(/.*@.*/) == -1 ) {
+         this.param1.focus();
          $('#result').html('Skriv din email');		
          return false;
        }
