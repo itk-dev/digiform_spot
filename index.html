@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Netlydbøger</title>
 
     <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
@@ -18,12 +18,14 @@
 	<script src="keyboard/jquery.keyboard.js"></script>
 	<script src="keyboard/danish.js" charset="utf-8"></script>      
     
-    
+    <link href="styles/spot.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="scripts/movs_script.js"></script>
+   
     
 <style>
 * { font-family:verdana, arial, helvetica, sans-serif; } 
 html { height:100%; width:100%; } 
-body { color:#fff; background-color:#000; font-size:0.8em; line-height:1.4em; padding:1em 0; margin:0; } 
+/*body { color:#fff; background-color:#000; font-size:0.8em; line-height:1.4em; padding:1em 0; margin:0; } */
 
 #main  { height:100%; width:100%; } 
 #header,#footer { height:50px;}
@@ -43,7 +45,7 @@ label 			{ width: 4em; float: left; text-align: right; margin-right: 0.5em; disp
 .submit input 	{ margin-left: 4.5em; } 	
 legend { font-weight: bold } 
 
-#fancybox-wrap { margin: -120px 0 0 0; }
+#fancybox-wrap { margin: -0px 0 0 0; }
 
 </style>
 
@@ -99,7 +101,14 @@ $(document).ready(function(){
            min_move_y: 20,
            preventDefaultEvents: true
       });
+      
+    $("#slider-arrow-left").click(function() { 
+      instanceOne.MouseWheel.handle(-1);
+    });
 
+    $("#slider-arrow-right").click(function() { 
+      instanceOne.MouseWheel.handle(1);
+    });
 
   // SUBMIT
 	  $("form").submit(function() {
@@ -165,32 +174,38 @@ bogdata["9788779558755"]="Krimi. Da en ung mand, der er tortureret ihjel, viser 
 </head>
 
 <body>
+    <div class="wrapper">
+      <div class="body-header">
+        <div class="logo"></div>
+        <div class="slogan">&nbsp;</div>
+      </div>
+      <div id="slider-arrow-left" class="slider-arrow-left"><img src="images/arrow-left.png" /></div>
+      <div id="slider-arrow-right" class="slider-arrow-right"><img src="images/arrow-right.png" /></div>
+  
+      <div id="main">
+      <a id="inline" href="#popup"></a>
+      <div class="header">
+        <h1>Spot en ebog</h1>
+      </div>
+      <div id="imageribbon" class="imageflow">
 
-<div id="main">
-<a id="inline" href="#popup"></a>
-<div class="header">
-	<h1>Spot en ebog</h1>
-</div>
-<div id="imageribbon" class="imageflow">
-
-<img src="http://digiformspot.etek.dk/billeder/isbn9788770534215.jpg" longdesc="9788770534215" width="320" height="516" alt="Madame Terror" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788702091250.jpg" longdesc="9788702091250" width="320" height="435" alt="Spiderwick fortællingerne" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788702048971.jpg" longdesc="9788702048971" width="320" height="542" alt="Det virkelige liv" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788764450293.jpg" longdesc="9788764450293" width="320" height="441" alt="Nu er vi så her" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788776976637.jpg" longdesc="9788776976637" width="320" height="499" alt="Vi bliver ikke yngre - fat det!" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788702051186.jpg" longdesc="9788702051186" width="320" height="506" alt="Kejserens atlas" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788770899048.jpg" longdesc="9788770899048" width="320" height="493" alt="Shakespeare forbandelsen" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788762502529.jpg" longdesc="9788762502529" width="320" height="465" alt="Livets pædagogik en kritik af livsfilosofien og dens pædagogisering" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788702093179.jpg" longdesc="9788702093179" width="320" height="320" alt="Blind gudinde" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788770894920.jpg" longdesc="9788770894920" width="320" height="444" alt="På den rette måde" />
-<img src="http://digiformspot.etek.dk/billeder/isbn9788779558755.jpg" longdesc="9788779558755" width="320" height="463" alt="Døden har en årsag" />
-
-</div>
-<div class="footer">
-<h1>Footer</h1>
-</div>
-</div>
-
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788770534215.jpg" longdesc="9788770534215" width="320" height="516" alt="Madame Terror" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788702091250.jpg" longdesc="9788702091250" width="320" height="435" alt="Spiderwick fortællingerne" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788702048971.jpg" longdesc="9788702048971" width="320" height="542" alt="Det virkelige liv" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788764450293.jpg" longdesc="9788764450293" width="320" height="441" alt="Nu er vi så her" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788776976637.jpg" longdesc="9788776976637" width="320" height="499" alt="Vi bliver ikke yngre - fat det!" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788702051186.jpg" longdesc="9788702051186" width="320" height="506" alt="Kejserens atlas" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788770899048.jpg" longdesc="9788770899048" width="320" height="493" alt="Shakespeare forbandelsen" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788762502529.jpg" longdesc="9788762502529" width="320" height="465" alt="Livets pædagogik en kritik af livsfilosofien og dens pædagogisering" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788702093179.jpg" longdesc="9788702093179" width="320" height="320" alt="Blind gudinde" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788770894920.jpg" longdesc="9788770894920" width="320" height="444" alt="På den rette måde" />
+      <img src="http://digiformspot.etek.dk/billeder/isbn9788779558755.jpg" longdesc="9788779558755" width="320" height="463" alt="Døden har en årsag" />
+      </div>
+      <div class="footer">
+      <h1>Footer</h1>
+      </div>
+      </div>
+    </div>
 
 <div style="display:none">
 
@@ -202,16 +217,15 @@ bogdata["9788779558755"]="Krimi. Da en ung mand, der er tortureret ihjel, viser 
 <form autocomplete="off" method="post">
 <fieldset>
 <legend>Send link hjem</legend>
-<p><label for="n">Navn</label> <input type="text" id="n" class="myinput" name="param1"/></p>
-<p><label for="e">E-mail</label> <input type="text" id="e" class="myinput" name="param2"/><br /></p>
-<p class="submit"><input type="submit" value="Send" /></p>
+<p class="desc">Udfyld feltet nedenfor og tryk på knappen så modtager du en e-mail med flere instrukser<br></p>
+<p class="desc" style="margin:4px;">Indtast din e-mail adresse</p> <input type="text" id="e" class="myinput" name="param2"/><br />
+<p class="submit"><input class="green-button" type="submit" value="Send mig en email" /></p>
 </fieldset>
 <input id="isbn" type="hidden" value="" name="param3"/>
 <input id="titel" type="hidden" value="" name="param4"/>
 </form> 
 </div>
 <div id="result"> </div>
-<p class="desc">Ved klik på send sendes en email med link til lydbogen på netlydbog.dk</p>
 </div>
 
 </div>
