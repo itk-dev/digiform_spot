@@ -64,6 +64,8 @@ html {
   height: 100%;  
 }
 
+/* ------------------  */
+
 body {
   background: url('../images/body-bg.png') repeat;
   min-height: 100%;
@@ -184,3 +186,28 @@ input.ui-widget-content {
   bottom: 10px;
   text-align: right;
 }
+
+/* irrelevante styles fjernes herunder */
+
+* { font-family:verdana, arial, helvetica, sans-serif; } 
+html { height:100%; width:100%; } 
+
+#main  { height:100%; width:100%; } 
+#header,#footer { height:50px;}
+
+#popup 		{ width: 320px;height:500px;color:#000;}
+
+#result 	{ padding:6px 0;font-weight: bold}
+
+#bookdata img 	{ width: 100px;height:auto;float:left;padding:0 5px 5px 0; }
+
+#myform {  clear:both;}
+#myform td 	{ padding:5px; }
+
+.desc { font-size: 80% }
+
+label 			{ width: 4em; float: left; text-align: right; margin-right: 0.5em; display: block } 
+.submit input 	{ margin-left: 4.5em; } 	
+legend { font-weight: bold } 
+
+#fancybox-wrap { margin: 0; }
