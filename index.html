@@ -103,11 +103,11 @@ $(document).ready(function(){
       });
       
     $("#slider-arrow-left").click(function() { 
-      instanceOne.MouseWheel.handle(-1);
+      instanceOne.MouseWheel.handle(1);
     });
 
     $("#slider-arrow-right").click(function() { 
-      instanceOne.MouseWheel.handle(1);
+      instanceOne.MouseWheel.handle(-1);
     });
 
   // SUBMIT
@@ -215,7 +215,7 @@ bogdata["9788779558755"]="Krimi. Da en ung mand, der er tortureret ihjel, viser 
 
 <div id="myform">
   <form class="myform" autocomplete="off" method="post">
-    <div class="form-email" style="margin:4px;position:absolute;bottom:10px;text-align:right;">
+    <div class="form-email" style="">
       <p class="desc">Udfyld feltet nedenfor og tryk på knappen så modtager du en e-mail med flere instrukser<br></p>
       <p class="desc" style="text-align:left;">Indtast din e-mail adresse</p> <input class="myinput form-email-felt" type="text" id="e" name="param2"/>
       <p class="submit" class="myform"><input class="green-button" type="submit" value="Send mig en email" /></p>
