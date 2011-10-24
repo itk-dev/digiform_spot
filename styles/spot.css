@@ -92,6 +92,8 @@ body {
   height: 100%;
   float: left;
   margin-left:31px;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .content {
@@ -158,16 +160,18 @@ input.ui-widget-content {
 	background: -moz-linear-gradient(top, #baf05e, #62b200);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#baf05e', endColorstr='#62b200');
 
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	/*text-shadow: 0 1px 1px rgba(0,0,0,.3);*/
+	text-shadow: 0px 1px #b5db87, -0px -1px rgba(0,0,0,.3);
 	-webkit-border-radius: .2em;
 	-moz-border-radius: .2em;
 	border-radius: .2em;
   
   cursor: pointer;
   cursor: hand;
-
 }
-
+.email-text {
+  text-align:left;
+}
 .form-email-felt {
   width: 99%;
   height: 30px;
@@ -179,5 +183,4 @@ input.ui-widget-content {
   position: absolute;
   bottom: 10px;
   text-align: right;
-  
 }
