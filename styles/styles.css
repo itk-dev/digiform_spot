@@ -72,6 +72,10 @@ body {
   width: 100%;
 }
 
+.wrapper {
+  width: 100%;
+}
+
 .body-header {
   position: relative;
   background-color: #be1f24;
@@ -79,15 +83,27 @@ body {
   top:00px;
 }
 
+@media (min-width: 600px){
 .slogan {
   /*background: url('../images/slogan.png') no-repeat;*/
   font: 1.2em  Arial,Helvetica,sans-serif ;
   color: #ffffff;
-  height:20px;
   right: 10px;
   bottom:10px;
   position: absolute;
   overflow: hidden;
+}
+}
+@media (max-width: 600px){
+.slogan {
+  /*background: url('../images/slogan.png') no-repeat;*/
+  font: .5em  Arial,Helvetica,sans-serif ;
+  color: #ffffff;
+  right: 10px;
+  bottom:10px;
+  position: absolute;
+  overflow: hidden;
+}
 }
 
 .logo {
@@ -123,8 +139,12 @@ body {
 .slider-arrow-right {
   position: fixed;
   top: 44%;
+  width: 6%;
 }
-
+.slider-arrow-left img,
+.slider-arrow-right img {
+  max-width: 100%;
+}
  .slider-arrow-left {
   left: 40px;
   z-index: 100;
@@ -156,10 +176,12 @@ input.ui-widget-content {
 }
 .green-button {
   height: 42px;
+  padding: 0 15px 0 15px;
   color: #446c12;
   font-size: 1em;
   font-weight: bold;
   border: 1px solid #b5db87;
+  background-color: #baf05e;
 	background: -webkit-gradient(linear, left top, left bottom, from(#baf05e), to(#62b200));
 	background: -moz-linear-gradient(top, #baf05e, #62b200);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#baf05e', endColorstr='#62b200');
@@ -218,10 +240,11 @@ input.ui-widget-content {
 /* irrelevante styles fjernes herunder */
 
 * { font-family:verdana, arial, helvetica, sans-serif; } 
-html { height:100%; width:100%; } 
+/*html { height:100%; width:100%; } */
 
 #main  { height:100%; width:100%; } 
-#header,#footer { height:50px;}
+
+/*#header,#footer { height:50px;}*/
 
 #popup 		{ width: 320px;height:500px;color:#000; }
 
@@ -230,11 +253,7 @@ html { height:100%; width:100%; }
 #bookdata img 	{ width: 100px;height:auto;float:left;padding:0 5px 5px 0; }
 
 #myform {  clear:both;}
-#myform td 	{ padding:5px; }
-
-
 
 label 			{ width: 4em; float: left; text-align: right; margin-right: 0.5em; display: block } 
 .submit input 	{ margin-left: 4.5em; } 	
-legend { font-weight: bold } 
 
