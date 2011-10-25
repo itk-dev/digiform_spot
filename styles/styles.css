@@ -80,12 +80,14 @@ body {
 }
 
 .slogan {
-  background: url('../images/slogan.png') no-repeat;
-  width:500px;
+  /*background: url('../images/slogan.png') no-repeat;*/
+  font: 1.2em  Arial,Helvetica,sans-serif ;
+  color: #ffffff;
   height:20px;
-  right: 0px;
+  right: 10px;
   bottom:10px;
   position: absolute;
+  overflow: hidden;
 }
 
 .logo {
