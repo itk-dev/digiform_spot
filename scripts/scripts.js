@@ -6,10 +6,14 @@ function go(isbn) {
 // kaldes fra flashen 
   titel='Dummy';
 
-	// tøm indhold i html
+	// tï¿½m indhold i html
 	$('#result').html('');
 
-	$('#bookdata').html('<img src="' + imagefolder + 'isbn' + isbn + '.jpg" /><b>' + booktable[isbn].t + '</b><br>' + booktable[isbn].d );
+  // hvis der ikke er en beskrivelse indsÃ¦tter vi en default tekst
+  if (booktable[isbn].d == null) {
+    booktable[isbn].d = 'Der er ingen yderlig beskrivelse';
+  }
+	$('#bookdata').html( '<div><h3>' + booktable[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + 'isbn' + isbn + '.jpg" />' + booktable[isbn].d + '</div>');
 
 	// slet indholdet
 	$('input:text').val(''); 
@@ -22,7 +26,7 @@ function go(isbn) {
   $('#popup').show();  // hide efter submit 4 sek
 	$('#myform').show(); // hide efter submit	
 	
-	// sæt fancyboks op og aktiver den
+	// sï¿½t fancyboks op og aktiver den
   	$("a#inline").fancybox({
 		'hideOnContentClick': false,
 		'hideOnOverlayClick' : false
@@ -47,10 +51,13 @@ $(document).ready(function(){
 
     // imageflow
     var instanceOne = new ImageFlow();
-    instanceOne.init({ ImageFlowID:'imageribbon',  reflections: false, 
+    instanceOne.init({ ImageFlowID:'imageribbon',  
+                     reflections: false, 
                      reflectionP: 0.0,
                      imagesHeight:0.8,
-                     scrollbarP: 0.1,
+                     scrollbarP: 0.1, 
+                     captions: false,
+                     imageFocusMax: 1,
                      onClick: function() {go(this.url);}
                      });
     // swipe
@@ -83,7 +90,7 @@ $(document).ready(function(){
          return false;
        }
 
-      // udtræk indhold - klar til ajax
+      // udtrï¿½k indhold - klar til ajax
       var str = $("form").serialize();
       
       $.ajax({
@@ -97,7 +104,7 @@ $(document).ready(function(){
               
               // skjul formularen
               $('#myform').hide();
-              // tøm indhold i formularen
+              // tï¿½m indhold i formularen
               $('input:text').val(''); 
               
               // fadeout hele popup og luk den til sidst

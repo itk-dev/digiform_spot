@@ -171,11 +171,19 @@ input.ui-widget-content {
   cursor: pointer;
   cursor: hand;
 }
+.desc { font-size: 90% }
+
 .email-text {
+  margin:0px;
   text-align:left;
 }
+.email-text.tiny{
+  font-size: 70%;
+}
+
 .form-email-felt {
-  width: 99%;
+  text-align:center;
+  width: 98%;
   height: 30px;
 }
 .form-email p{
@@ -184,8 +192,26 @@ input.ui-widget-content {
 .form-email {
   position: absolute;
   bottom: 10px;
-  text-align: right;
+  text-align: left;
+  
 }
+
+.popup-form {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: .9em;
+  line-height: 150%;
+  margin: 5px; 
+}
+.popup-form h3 {
+  font-weight: bold;
+}
+
+.submit {
+  text-align: right;
+  margin-right: 2px; 
+}
+
+#fancybox-wrap { margin: 0; z-index: 20000;}
 
 /* irrelevante styles fjernes herunder */
 
@@ -195,7 +221,7 @@ html { height:100%; width:100%; }
 #main  { height:100%; width:100%; } 
 #header,#footer { height:50px;}
 
-#popup 		{ width: 320px;height:500px;color:#000;}
+#popup 		{ width: 320px;height:500px;color:#000; }
 
 #result 	{ padding:6px 0;font-weight: bold}
 
@@ -204,10 +230,9 @@ html { height:100%; width:100%; }
 #myform {  clear:both;}
 #myform td 	{ padding:5px; }
 
-.desc { font-size: 80% }
+
 
 label 			{ width: 4em; float: left; text-align: right; margin-right: 0.5em; display: block } 
 .submit input 	{ margin-left: 4.5em; } 	
 legend { font-weight: bold } 
 
-#fancybox-wrap { margin: 0; }
