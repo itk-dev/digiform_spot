@@ -60,6 +60,7 @@ $(document).ready(function(){
                      scrollbarP: 0.5, 
                      captions: false,
                      imageFocusMax: 1,
+                     imageFocusM: 0.9,
                      xstep: 150,
                      onClick: function() {go(this.url);}
                      });
