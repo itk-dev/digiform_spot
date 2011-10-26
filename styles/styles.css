@@ -113,7 +113,7 @@ body {
 
 #main  { width:100%; top: 00px; position: absolute; margin: 0px auto;} 
 
-@media (max-width: 900px){
+@media (max-width: 1200px){
   #main {
     top: 70px;
   }
@@ -152,8 +152,8 @@ body {
 .slider-arrow-right {
 /*fixed pos aligner arrows til outer div, absolute aligner til main*/
   position: absolute; 
-  margin-top: 12%;
-  top: 44%;
+  margin-top: 12%; /*positionering*/
+  top: 54%;
   width: 6%;
 }
 .slider-arrow-left img,
@@ -231,6 +231,7 @@ input.ui-widget-content {
 .form-email p{
   margin-top: 10px;
 }
+
 .form-email {
   position: absolute;
   bottom: 10px;
@@ -272,8 +273,8 @@ input.ui-widget-content {
 }
 
 #popup { 
-  max-width: 352px;
-  min-height: 450px; 
+  width: 352px;
+  height: 450px; 
   color:#000; 
 }
 

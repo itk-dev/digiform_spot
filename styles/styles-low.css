@@ -1,0 +1,20 @@
+/* 
+    Document   : styles-low
+    Created on : 25-10-2011, 13:15:23
+    Author     : azkb073
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+  display: block;
+}
+
+body {
+  background: none red !important;
+}
