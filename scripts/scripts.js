@@ -1,32 +1,29 @@
 
-var imagefolder='http://digiformspot.etek.dk/books/';
+var imagefolder='http://images.spot.ereolen.dk/books/';
 
 
 function go(isbn) {
-// kaldes fra flashen 
-  titel='Dummy';
 
-	// t�m indhold i html
+	// rydop
 	$('#result').html('');
-
-  // hvis der ikke er en beskrivelse indsætter vi en default tekst
+	$('input:text').val(''); 
+  
+  // 
   if (booktable[isbn].d == null) {
-    booktable[isbn].d = 'Der er ingen yderlig beskrivelse';
+    booktable[isbn].d = '';
   }
 	$('#bookdata').html( '<div><h3>' + booktable[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + 'isbn' + isbn + '.jpg" />' + booktable[isbn].d + '</div>');
 
-	// slet indholdet
-	$('input:text').val(''); 
-	
-	// gem isbn/titel i formen
+	// gem values i formen
 	$('#isbn').val(isbn);
-	$('#titel').val(titel);	
-	
+	$('#titel').val(booktable[isbn].t);	
+	$('#type').val('type');	// ændres
+        
     // vis boksen (ifald den tidligere er fadeout
   $('#popup').show();  // hide efter submit 4 sek
 	$('#myform').show(); // hide efter submit	
 	
-	// s�t fancyboks op og aktiver den
+	// sæt fancyboks op og aktiver den
   	$("a#inline").fancybox({
 		'hideOnContentClick': false,
 		'hideOnOverlayClick' : false
@@ -65,9 +62,9 @@ $(document).ready(function(){
                      onClick: function() {go(this.url);}
                      });
     // swipe
-    $("#main").touchwipe({
-           wipeLeft: function() { instanceOne.MouseWheel.handle(1) },
-           wipeRight: function() { instanceOne.MouseWheel.handle(-1) },
+    $("body").touchwipe({
+           wipeLeft: function() { instanceOne.MouseWheel.handle(-1) },
+           wipeRight: function() { instanceOne.MouseWheel.handle(1) },
          //  wipeUp: function() { alert("up"); },
          //  wipeDown: function() { alert("down"); },
            min_move_x: 20,
@@ -94,7 +91,7 @@ $(document).ready(function(){
          return false;
        }
 
-      // udtr�k indhold - klar til ajax
+      // udtræk indhold - klar til ajax
       var str = $("form").serialize();
       
       $.ajax({
@@ -108,7 +105,7 @@ $(document).ready(function(){
               
               // skjul formularen
               $('#myform').hide();
-              // t�m indhold i formularen
+              // tøm indhold i formularen
               $('input:text').val(''); 
               
               // fadeout hele popup og luk den til sidst
