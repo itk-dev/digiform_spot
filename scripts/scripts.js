@@ -1,5 +1,5 @@
 
-var imagefolder='http://digiformspot.etek.dk/books/';
+var imagefolder='http://images.spot.ereolen.dk/books/';
 
 
 function go(isbn) {
