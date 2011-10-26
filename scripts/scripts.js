@@ -51,19 +51,22 @@ $(document).ready(function(){
 
     // imageflow
     var instanceOne = new ImageFlow();
-    instanceOne.init({ ImageFlowID:'imageribbon',  
+    instanceOne.init({ ImageFlowID:'imageribbon',
+                     circular: true,
+                     slider: false,
                      reflections: false, 
-                     reflectionP: 0.0,
+                     reflectionP: 0.4,
                      imagesHeight:0.8,
-                     scrollbarP: 0.1, 
+                     scrollbarP: 0.5, 
                      captions: false,
                      imageFocusMax: 1,
+                     xstep: 150,
                      onClick: function() {go(this.url);}
                      });
     // swipe
     $("#main").touchwipe({
-           wipeLeft: function() { instanceOne.MouseWheel.handle(-1) },
-           wipeRight: function() { instanceOne.MouseWheel.handle(1) },
+           wipeLeft: function() { instanceOne.MouseWheel.handle(1) },
+           wipeRight: function() { instanceOne.MouseWheel.handle(-1) },
          //  wipeUp: function() { alert("up"); },
          //  wipeDown: function() { alert("down"); },
            min_move_x: 20,

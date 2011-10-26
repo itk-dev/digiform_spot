@@ -104,6 +104,19 @@ body {
   position: absolute;
   overflow: hidden;
 }
+
+.popup-wrapper {
+  font-size: .9em;
+  width: 100%;
+}
+}
+
+#main  { width:100%; top: 00px; position: absolute; margin: 0px auto;} 
+
+@media (max-width: 900px){
+  #main {
+    top: 70px;
+  }
 }
 
 .logo {
@@ -137,7 +150,9 @@ body {
 
 .slider-arrow-left,
 .slider-arrow-right {
-  position: fixed;
+/*fixed pos aligner arrows til outer div, absolute aligner til main*/
+  position: absolute; 
+  margin-top: 12%;
   top: 44%;
   width: 6%;
 }
@@ -195,7 +210,10 @@ input.ui-widget-content {
   cursor: pointer;
   cursor: hand;
 }
-.desc { font-size: 90% }
+
+.desc { 
+  font-size: 90% 
+}
 
 .email-text {
   margin:0px;
@@ -235,18 +253,39 @@ input.ui-widget-content {
   margin-right: 2px; 
 }
 
-#fancybox-wrap { margin: 0; z-index: 20000;}
+#fancybox-wrap {
+  margin: 0; 
+  z-index: 20000;
+  /*max-width: 25%;*/
+}
+#fancybox-inner {
+  overflow: hidden;
+  
+}
+
+.ui-keyboard {
+  z-index: 30000;
+}
+
+.popup-wrapper {
+/*  width: 25%;*/
+}
+
+#popup { 
+  max-width: 352px;
+  min-height: 450px; 
+  color:#000; 
+}
 
 /* irrelevante styles fjernes herunder */
 
 * { font-family:verdana, arial, helvetica, sans-serif; } 
 /*html { height:100%; width:100%; } */
 
-#main  { height:100%; width:100%; } 
+
 
 /*#header,#footer { height:50px;}*/
 
-#popup 		{ width: 320px;height:500px;color:#000; }
 
 #result 	{ padding:6px 0;font-weight: bold}
 
