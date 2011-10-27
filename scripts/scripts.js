@@ -103,7 +103,10 @@ $(document).ready(function(){
           success: function(data) {  
               // efter submit 
               // vis resultat
-              $('#result').html(data); 
+              
+              if (data == true) {
+                $('#result').html('alt er ok: ' +data);
+              }
               
               // skjul formularen
               $('#myform').hide();
