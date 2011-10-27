@@ -104,7 +104,7 @@ $(document).ready(function(){
               // efter submit 
               // vis resultat
               
-              if (data == "1") {
+              if (data == "0") {
                 $('#result').html('alt er ok: ' +data);
               }
               
