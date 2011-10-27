@@ -25,7 +25,8 @@ function go(isbn) {
 	
 	// sæt fancyboks op og aktiver den
   	$("a#inline").fancybox({
-		'hideOnContentClick': false,
+    'overlayOpacity' : 0.9,
+    'hideOnContentClick': false,
 		'hideOnOverlayClick' : false
 	}).click();
 
@@ -59,6 +60,7 @@ $(document).ready(function(){
                      imageFocusMax: 1,
                      imageFocusM: 0.9,
                      xstep: 150,
+                     imageCursor: 'none',
                      onClick: function() {go(this.url);}
                      });
     // swipe

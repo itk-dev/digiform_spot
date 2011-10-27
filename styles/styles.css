@@ -67,13 +67,16 @@ html {
 /* ------------------  */
 
 body {
-  background: url('../images/body-bg1.png') repeat;
+  background: url('../images/body-bg.png') repeat;
   min-height: 100%;
   width: 100%;
+  cursor: none;
+  
 }
 
 .wrapper {
   width: 100%;
+  cursor: none;
 }
 
 .body-header {
@@ -115,7 +118,7 @@ body {
 
 @media (max-width: 1200px){
   #main {
-    top: 70px;
+    top: 0px;
   }
 }
 
@@ -152,24 +155,26 @@ body {
 .slider-arrow-right {
 /*fixed pos aligner arrows til outer div, absolute aligner til main*/
   position: absolute; 
-  margin-top: 12%; /*positionering*/
-  top: 48%;
+  margin-top: 20%; /*positionering*/
+  top: 45%;
   width: 8%;
-    z-index: 30000;
+  z-index: 200;
   
 }
+
 .slider-arrow-left img,
 .slider-arrow-right img {
   max-width: 100%;
 }
- .slider-arrow-left {
+
+.slider-arrow-left {
   left: 2%;
   cursor: pointer;
   cursor: hand;
 }
 
- .slider-arrow-right {
-  right: 2%;
+.slider-arrow-right {
+  right: 0%;
   cursor: pointer;
   cursor: hand;
 }
