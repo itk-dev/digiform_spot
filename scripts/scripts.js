@@ -25,7 +25,8 @@ function go(isbn) {
 	
 	// sæt fancyboks op og aktiver den
   	$("a#inline").fancybox({
-		'hideOnContentClick': false,
+    'overlayOpacity' : 0.9,
+    'hideOnContentClick': false,
 		'hideOnOverlayClick' : false
 	}).click();
 
@@ -53,11 +54,13 @@ $(document).ready(function(){
                      slider: false,
                      reflections: false, 
                      reflectionP: 0.4,
-                     imagesHeight:0.8,
+                     imagesHeight:0.75,
                      scrollbarP: 0.5, 
                      captions: false,
                      imageFocusMax: 1,
+                     imageFocusM: 0.9,
                      xstep: 150,
+                     imageCursor: 'none',
                      onClick: function() {go(this.url);}
                      });
     // swipe
