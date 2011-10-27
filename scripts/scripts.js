@@ -17,7 +17,7 @@ function go(isbn) {
 	// gem values i formen
 	$('#isbn').val(isbn);
 	$('#titel').val(booktable[isbn].t);	
-	$('#type').val('type');	// ændres
+	$('#type').val(booktable[isbn].s);
         
     // vis boksen (ifald den tidligere er fadeout
   $('#popup').show();  // hide efter submit 4 sek
