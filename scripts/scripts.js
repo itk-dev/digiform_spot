@@ -22,7 +22,7 @@ function go(isbn) {
     // vis boksen (ifald den tidligere er fadeout
   $('#popup').show();  // hide efter submit 4 sek
 	$('#myform').show(); // hide efter submit	
-	
+	$('#result').removeClass('result');
 	// sæt fancyboks op og aktiver den
   	$("a#inline").fancybox({
     'overlayOpacity' : 0.9,
@@ -89,7 +89,8 @@ $(document).ready(function(){
       // meget simpel emailvalidering
       if ( this.param1.value.search(/.*@.*/) == -1 ) {
          this.param1.focus();
-         $('#result').html('Skriv din email');		
+         $('#result').addClass('result');
+         $('#result').html('<div class="success"><p>Skriv din email</p></div>');		
          return false;
        }
 
@@ -104,8 +105,9 @@ $(document).ready(function(){
               // efter submit 
               // vis resultat
               
-              if (data == "0") {
-                $('#result').html('alt er ok: ' +data);
+              if (data == "1") {
+                $('#result').addClass('result');
+                $('#result').html('<div class="success"><p>Tak for din tilmelding</p></div>');
               }
               
               // skjul formularen
@@ -117,7 +119,13 @@ $(document).ready(function(){
               $('#popup').fadeOut(4000, function(){ $.fancybox.close() } );
               
               },
-          dataType: 'html'
+          dataType: 'html',
+          error: function() {
+              /*$('#result').addClass('result');
+              $('#result').html('<div class="success"><p>Test: lorem ipsum dolar </p></div>');*/
+              }
+           
+          
         });
       return false;
     });
