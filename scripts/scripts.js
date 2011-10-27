@@ -53,7 +53,7 @@ $(document).ready(function(){
                      slider: false,
                      reflections: false, 
                      reflectionP: 0.4,
-                     imagesHeight:0.8,
+                     imagesHeight:0.75,
                      scrollbarP: 0.5, 
                      captions: false,
                      imageFocusMax: 1,

@@ -67,7 +67,7 @@ html {
 /* ------------------  */
 
 body {
-  background: url('../images/body-bg.png') repeat;
+  background: url('../images/body-bg1.png') repeat;
   min-height: 100%;
   width: 100%;
 }
@@ -153,23 +153,23 @@ body {
 /*fixed pos aligner arrows til outer div, absolute aligner til main*/
   position: absolute; 
   margin-top: 12%; /*positionering*/
-  top: 54%;
-  width: 6%;
+  top: 48%;
+  width: 8%;
+    z-index: 30000;
+  
 }
 .slider-arrow-left img,
 .slider-arrow-right img {
   max-width: 100%;
 }
  .slider-arrow-left {
-  left: 40px;
-  z-index: 100;
+  left: 2%;
   cursor: pointer;
   cursor: hand;
 }
 
  .slider-arrow-right {
-  right: 40px;
-  z-index: 100;
+  right: 2%;
   cursor: pointer;
   cursor: hand;
 }
