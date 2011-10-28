@@ -40,3 +40,9 @@ root {
 	z-index: 1103;
 	display: none;
 }
+
+.ui-keyboard{ padding: .3em; position: absolute; z-index: 30000;}
+.ui-keyboard-button{height: 3em; width: 3em; margin: .1em;}
+.ui-keyboard-button span {font-size: 1.5em;}
+.ui-keyboard-actionkey{width: 6em;}
+.ui-keyboard-space{width: 20em;}

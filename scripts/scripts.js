@@ -22,7 +22,6 @@ function go(isbn) {
     // vis boksen (ifald den tidligere er fadeout
   $('#popup').show();  // hide efter submit 4 sek
 	$('#myform').show(); // hide efter submit	
-	$('#result').removeClass('result');
 	// sæt fancyboks op og aktiver den
   	$("a#inline").fancybox({
     'overlayOpacity' : 0.9,
@@ -89,8 +88,7 @@ $(document).ready(function(){
       // meget simpel emailvalidering
       if ( this.param1.value.search(/.*@.*/) == -1 ) {
          this.param1.focus();
-         $('#result').addClass('result');
-         $('#result').html('<div class="success"><p>Skriv din email</p></div>');		
+         $('#result').html('<div class="message-info"><p>Skriv din email adresse</p></div>');		
          return false;
        }
 
@@ -106,8 +104,7 @@ $(document).ready(function(){
               // vis resultat
               
               if (data == "1") {
-                $('#result').addClass('result');
-                $('#result').html('<div class="success"><p>Tak for din tilmelding</p></div>');
+                $('#result').html('<div class="message-success"><p>Tak for din tilmelding</p></div>');
               }
               
               // skjul formularen

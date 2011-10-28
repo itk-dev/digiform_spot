@@ -241,7 +241,6 @@ input.ui-widget-content {
   position: absolute;
   bottom: 10px;
   text-align: left;
-  
 }
 
 .popup-form {
@@ -265,16 +264,7 @@ input.ui-widget-content {
   /*max-width: 25%;*/
 }
 #fancybox-inner {
-  overflow: hidden;
-  
-}
-
-.ui-keyboard {
-  z-index: 30000;
-}
-
-.popup-wrapper {
-/*  width: 25%;*/
+  overflow: hidden;  
 }
 
 #popup { 
@@ -283,30 +273,32 @@ input.ui-widget-content {
   color:#000; 
 }
 
-#result p	{ 
-  text-align: center;
-  margin: 10px;
-  padding-bottom: 6px;
-  font: 1.2em bold;
-  -webkit-border-radius: 1.6em;
-  -moz-border-radius: 1.6em;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+.message-info {
+  background: #c1d3ee url('../images/icon-info.png') no-repeat 5% 50%;
+  border: 1px solid #5589d8;
+  height: 50px;
+  width: 100%;
+  display: table;
 }
 
-.result {
-  margin: 10px;
-  padding: 7px 6px 0;
-  line-height: 100%;
-  border-radius: 2em;
-  -webkit-border-radius: 2em;
-  -moz-border-radius: 2em;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
-  background: #8B8B8B;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a9a9a9', endColorstr='#7a7a7a');
-  background: -webkit-gradient(linear, left top, left bottom, from(darkGray), to(#7A7A7A));
-  background: -moz-linear-gradient(top, darkGray, #7A7A7A);
-  border: solid 1px #6D6D6D;
+.message-info p{
+  text-indent: 50px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.message-success {
+  background: #c4ecc4 url('../images/icon-success.png') no-repeat 5% 50%;
+  border: 1px solid #257325;
+  height: 50px;
+  width: 100%;
+  display: table;
+}
+
+.message-success p{
+  text-indent: 50px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 
