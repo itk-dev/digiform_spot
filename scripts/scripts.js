@@ -12,7 +12,7 @@ function go(isbn) {
   if (booktable[isbn].d == null) {
     booktable[isbn].d = '';
   }
-	$('#bookdata').html( '<div><h3>' + booktable[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + 'isbn' + isbn + '.jpg" />' + booktable[isbn].d + '</div>');
+	$('#bookdata').html( '<div><h3>' + booktable[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + booktable[isbn].i + '" />' + booktable[isbn].d + '</div>');
 
 	// gem values i formen
 	$('#isbn').val(isbn);
@@ -42,7 +42,7 @@ $(document).ready(function(){
     for ( i=0; i < bookdata.length; i++ ) {
       var e=bookdata[i];
       booktable[e.id]=e;
-      s += '<img src="' + imagefolder + 'isbn' + e.id + '.jpg" longdesc="' + e.id + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" />'
+      s += '<img src="' + imagefolder + e.i + '" longdesc="' + e.id + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" />'
     }
     $('#imageribbon').html(s);
 
