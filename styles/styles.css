@@ -114,13 +114,13 @@ body {
 }
 }
 
-#main  { width:100%; top: 00px; position: absolute; margin: 0px auto;} 
+#main  { width:100%; top: -100px; position: absolute; margin: 0px auto;} 
 
-@media (max-width: 1200px){
+/* @media (max-width: 1200px){
   #main {
     top: 0px;
   }
-}
+}*/
 
 .logo {
   background: url('../images/e-reolen.png') no-repeat;
