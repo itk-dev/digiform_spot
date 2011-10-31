@@ -106,6 +106,9 @@ $(document).ready(function(){
               if (data == "1") {
                 $('#result').html('<div class="message-success"><p>Tak for din tilmelding</p></div>');
               }
+              else {
+                $('#result').html('<div class="message-error"><p>Der er sket en fejl, prøv igen.</p></div>');
+              }
               
               // skjul formularen
               $('#myform').hide();
@@ -117,9 +120,8 @@ $(document).ready(function(){
               
               },
           dataType: 'html',
-          error: function() {
-              /*$('#result').addClass('result');
-              $('#result').html('<div class="success"><p>Test: lorem ipsum dolar </p></div>');*/
+          error: function(jqXHR, textmsg) {
+                $('#result').html('<div class="message-error"><p>Der er sket en hændelsestype: ' + textmsg + ' , prøv igen.</p></div>');
               }
            
           

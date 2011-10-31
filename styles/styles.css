@@ -282,7 +282,7 @@ input.ui-widget-content {
 }
 
 .message-info p{
-  text-indent: 50px;
+  padding-left: 50px;
   display: table-cell;
   vertical-align: middle;
 }
@@ -296,11 +296,24 @@ input.ui-widget-content {
 }
 
 .message-success p{
-  text-indent: 50px;
+ padding-left: 50px;
   display: table-cell;
   vertical-align: middle;
 }
 
+.message-error {
+  background: #f7c4c4 url('../images/icon-error.png') no-repeat 5% 50%;
+  border: 1px solid #d92222;
+  height: 50px;
+  width: 100%;
+  display: table;
+}
+
+.message-error p{
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 50px;
+}
 
 /* irrelevante styles fjernes herunder */
 
