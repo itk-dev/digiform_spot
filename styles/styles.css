@@ -114,7 +114,12 @@ body {
 }
 }
 
-#main  { width:100%; top: -100px; position: absolute; margin: 0px auto;} 
+#main  {
+  width:100%;
+  top: -25px;
+  position: absolute;
+  margin: 0px auto;
+} 
 
 /* @media (max-width: 1200px){
   #main {
