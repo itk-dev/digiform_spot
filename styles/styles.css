@@ -230,13 +230,14 @@ input.ui-widget-content {
   text-align:left;
 }
 .email-text.tiny{
-  font-size: 70%;
+  font-size: 80%;
 }
 
 .form-email-felt {
   text-align:center;
   width: 98%;
-  height: 30px;
+  height: 40px;
+  border-color: #666;
 }
 .form-email p{
   margin-top: 10px;
