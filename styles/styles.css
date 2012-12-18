@@ -70,13 +70,13 @@ body {
   background: url('../images/body-bg.png') repeat;
   min-height: 100%;
   width: 100%;
-  cursor: none;
+  /*cursor: none;*/
   
 }
 
 .wrapper {
   width: 100%;
-  cursor: none;
+  /*cursor: none;*/
 }
 
 .body-header {

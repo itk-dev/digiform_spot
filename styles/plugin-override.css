@@ -17,7 +17,7 @@ root {
 
 .imageflow img {
   border:.5em solid #fff;
-  cursor: none;
+ /* cursor: none;*/
 }
 
 .imageflow {
