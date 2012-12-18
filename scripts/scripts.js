@@ -59,7 +59,7 @@ $(document).ready(function(){
                      imageFocusMax: 1,
                      imageFocusM: 0.9,
                      xstep: 150,
-                     imageCursor: 'none',
+                    /* imageCursor: 'none',*/
                      onClick: function() {go(this.url);}
                      });
     // swipe
