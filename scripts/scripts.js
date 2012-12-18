@@ -104,7 +104,7 @@ $(document).ready(function(){
               // vis resultat
               
               if (data == "1") {
-                $('#result').html('<div class="message-success"><p>Tak for din tilmelding</p></div>');
+                $('#result').html('<div class="message-success"><p>Din email er sendt.</p></div>');
               }
               else {
                 $('#result').html('<div class="message-error"><p>Der er sket en fejl, prøv igen.</p></div>');
