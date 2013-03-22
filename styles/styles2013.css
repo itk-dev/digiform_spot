@@ -367,7 +367,7 @@ root {
 
 #menucontainer{ height:40px; background-color:black; }
 
-#menu { position:relative; z-index: 1000; margin-left: auto ;  margin-right: auto ; width:600px;}
+#menu { position:relative; z-index: 10000; margin-left: auto ;  margin-right: auto ; width:600px;}
 
 #menu li { display:inline-block; width: auto; }
 #menu li.sub { display:block; width: auto;}

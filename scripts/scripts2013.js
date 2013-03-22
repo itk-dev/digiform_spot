@@ -7,15 +7,18 @@ function show ( sid ) {
     
     listid='b' + sid
     
-    var s="";
-    for ( k=0; k<menudata.list[listid].length; k++){
-      var id=menudata.list[listid][k];
+    var html="";
+    var L = menudata.list[listid].length;
+    var B = Math.floor(Math.random() * L)
+    var S = B + L
+    for ( k = B; k < S; k++){
+      var id = k>=L ? menudata.list[listid][k-L] : menudata.list[listid][k];
       e = booktable[id];
       if(e) {
-        s += '<img src="' + imagefolder + e.i + '" rel="' + e.id + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" />'
+        html += '<img src="' + imagefolder + e.i + '" rel="' + e.id + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" />'
       }
     }
-    $('#imageribbon').html(s);
+    $('#imageribbon').html(html);
     
     imageflowObj = new ImageFlow();
     
@@ -97,7 +100,7 @@ function init_touchwipe(imageflowObj){
 
 }
 function make_item(ele){
-  return '<a href="#" onclick="return show(' + ele.sid + ');">'+ ele.label +'</a>';
+  return '<a href="#" onclick="return show(' + ele.sid + ');">'+ ele.label +'</a>';// (' + menudata.list['b'+ele.sid].length + ')';;
 }
 
 $(document).ready(function(){
@@ -110,12 +113,13 @@ $(document).ready(function(){
    for ( i = 0; i < menudata.menu.length; i++) {
      s += '<li>' + make_item( menudata.menu[i][0] );
 
-     s += '<ul>'
-     for ( j=1; j < menudata.menu[i].length; j++) {
-       s += '<li class="sub">' + make_item( menudata.menu[i][j] ) + '</li>';
-     }
-     s += '</ul>'  
-     
+     if ( menudata.menu[i].length > 1 ) {
+       s += '<ul>'
+       for ( j=1; j < menudata.menu[i].length; j++) {
+         s += '<li class="sub">' + make_item( menudata.menu[i][j] ) + '</li>';
+       }
+       s += '</ul>'  
+     }     
      s += '</li>'
    }
    s += '</ul>'
