@@ -13,9 +13,13 @@ Array.prototype.shuffle = function () {
     return this;
 }
 
+
 function show_imagebanner (sid, maxele) {
 
-    if (!sid) return false;
+    if (!sid) return;
+
+    // HACK: try not to initialize more than one image_banner on the same time
+    if (imageflowObj && imageflowObj.firstRefresh) return;
 
     // bland listen af numre
     menudata.list[sid].shuffle();
@@ -26,7 +30,7 @@ function show_imagebanner (sid, maxele) {
       listlength=maxele;
     }
 
-    var s="";
+    var s='';
     for ( var k = 0; k < listlength; k++){
       var id = menudata.list[sid][k];
       var e = booktable[id];
@@ -34,7 +38,6 @@ function show_imagebanner (sid, maxele) {
         s += '<img src="' + imagefolder + e.i + '" rel="' + id + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" />'
       }
     }
-
     $('#imageribbon').html(s);
 
     imageflowObj = new ImageFlow();
@@ -52,12 +55,10 @@ function show_imagebanner (sid, maxele) {
                      xstep: 150,
                      onClick: function() {show_popupbox(this);}
                      });
-
 }
 
 function init_movements() {
-    // sæt forskellige movements op - bemærk at det aktuelle imageflowobj "aktiveres"
-    // - vi antager at der altid er et aktivt
+    // antager at det aktuelle imageflowobj indeholder imageflow-objectet
 
     // swipe
     $("body").touchwipe({
@@ -131,11 +132,7 @@ function show_popupbox(ele) {
 	$('#myform').show(); // hide efter submit
 
 	// sæt fancyboks op og aktiver den
-	$("#inline").fancybox({
-    'overlayOpacity' : 0.9,
-    'hideOnContentClick': false,
-		'hideOnOverlayClick' : false
-	}).click();
+	$("#inline").fancybox().click();
 
 }
 
@@ -221,7 +218,7 @@ $(document).ready(function(){
     });
 
     // inaktiv-checkeren...
-    setInterval(function() { idleTime+= 5; if(idleTime>15) { idleTime=0; $("#slider-arrow-right").click();} }, 5000);
+    setInterval(function() { idleTime+= 5; if(idleTime>10) { idleTime=0; $("#slider-arrow-right").click();} }, 5000);
 
     $("body").mousemove(function (e) {
         idleTime = 0;
