@@ -22,7 +22,7 @@ function show_imagebanner (sid, maxele) {
     if (imageflowObj && imageflowObj.firstRefresh) return;
 
     // bland listen af numre
-    menudata.list[sid].shuffle();
+   // menudata.list[sid].shuffle();
 
     // haandter visning af maxelementer
     var listlength = menudata.list[sid].length
