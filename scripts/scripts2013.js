@@ -21,7 +21,7 @@ function show_imagebanner (sid, maxele) {
     // HACK: try not to initialize more than one image_banner on the same time
     if (imageflowObj && imageflowObj.firstRefresh) return;
 
-    $('#menu').menu("collapse" );
+    $('#menu').menu("collapseAll", null, true);
 
     // bland listen af numre
     menudata.list[sid].shuffle();

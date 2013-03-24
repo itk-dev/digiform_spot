@@ -21,6 +21,8 @@ function show_imagebanner (sid, maxele) {
     // HACK: try not to initialize more than one image_banner on the same time
     if (imageflowObj && imageflowObj.firstRefresh) return;
 
+    $('#menu').menu("collapseAll", null, true);
+
     // bland listen af numre
    // menudata.list[sid].shuffle();
 
@@ -41,8 +43,8 @@ function show_imagebanner (sid, maxele) {
 
     var el = document.createElement('div');
     $(el).attr('id', 'imageribbon').html(s);
-    $('#imagecontainer').html(el);    
-   
+    $('#imagecontainer').html(el);
+
     imageflowObj = new ImageFlow();
 
     imageflowObj.init({ ImageFlowID:'imageribbon',
