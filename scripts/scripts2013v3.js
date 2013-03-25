@@ -41,24 +41,24 @@ function show_imagebanner (sid, maxele) {
     var el = document.createElement('ul');
     $(el).html(s);
 
-    // slet tidligere carousel
-    if(carouselObj) $('.jcarousel').jcarousel('destroy');    
+    // slet tidligere carousel - er det nødvendigt?
+    if(carouselObj) $('.jcarousel').jcarousel('destroy');  
     
     // overfør data 
     $('.jcarousel').html(el);
 
-    // tildel popup-funktion
+    // tildel click-funktion
     $.each( menudata.list[sid], function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
     
     // opret carousel
     carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular' });
-
-    $('.jcarousel-prev').jcarouselControl({ target: '-=1', carousel: carouselObj });
-    $('.jcarousel-next').jcarouselControl({ target: '+=1', carousel: carouselObj });    
-
+    
 }
 
 function init_movements() {
+
+    $('.jcarousel-prev').click(function() { $('.jcarousel').jcarousel('scroll', '-=1'); });
+    $('.jcarousel-next').click(function() { $('.jcarousel').jcarousel('scroll', '+=1'); });    
 
     // swipe
     $("body").touchwipe({
