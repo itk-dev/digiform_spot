@@ -135,23 +135,9 @@ body {
   width: 100%;
 }
 
-.slider {
-  margin: 0px auto;
-}
-
-.slider .slider-nav {
-  height: 100%;
-  overflow: auto;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
 .slider-arrow-left,
 .slider-arrow-right {
-/*fixed pos aligner arrows til outer div, absolute aligner til main*/
   position: absolute;
-  /*margin-top: 20%; *//*positionering*/
   top: 45%;
   width: 8%;
   z-index: 200;
@@ -173,15 +159,6 @@ body {
   right: 0%;
   cursor: pointer;
   cursor: hand;
-}
-
-.slimg {
-  display: inline-block;
-  margin: 10px;
-}
-
-.slimg img {
-  vertical-align: middle;
 }
 
 input.ui-widget-content {
@@ -351,7 +328,7 @@ root {
 
 #imagecontainer {
     margin: 0 auto;
-    padding:30px 100px 0 100px;
+    padding:30px 120px 0 120px;
     position: relative;
 }
 
@@ -362,7 +339,7 @@ root {
 }
 
 .jcarousel ul {
-    width: 800000px;
+    width: 40000px;
     position: absolute;
     list-style: none;
     margin: 0;
@@ -376,5 +353,7 @@ root {
 
 .jcarousel img {
   border:3px solid #fff;
+  max-width:330px;
+  
 }
 

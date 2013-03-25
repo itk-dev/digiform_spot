@@ -2,6 +2,7 @@
 var imagefolder='http://images.spot.ereolen.dk/books/';
 var idleTime = 0;
 var carouselObj;
+var maxImagesInList = 100;
 
 Array.prototype.shuffle = function () {
   for (var i = this.length - 1; i > 0; i--) {
@@ -14,21 +15,22 @@ Array.prototype.shuffle = function () {
 }
 
 
-function show_imagebanner (sid, maxele) {
+function show_imagebanner (sid) {
 
     // bland listen af numre
     menudata.list[sid].shuffle();
 
     // haandter visning af maxelementer
     var listlength = menudata.list[sid].length
-    if ( maxele && listlength>maxele ) {
-      listlength=maxele;
+    if ( listlength>maxImagesInList ) {
+      listlength=maxImagesInList;
     }
 
     var s='';
     var bredde=0,hojde=0;
     for ( var k = 0; k < listlength; k++){
       var id = menudata.list[sid][k];
+      // menudata og booktable har data fra forskellige kilder
       var e = booktable[id];
       if(e) {
         s += '<li><img src="' + imagefolder + e.i + '" id="isbn_' + id + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
@@ -36,7 +38,7 @@ function show_imagebanner (sid, maxele) {
         if ( e.h>hojde) hojde=+e.h
       }
     }
-    console.log('B='+bredde+' H='+hojde)
+    //console.log('B='+bredde+' H='+hojde)
 
     var el = document.createElement('ul');
     $(el).html(s);
@@ -48,7 +50,7 @@ function show_imagebanner (sid, maxele) {
     $('.jcarousel').html(el);
 
     // tildel click-funktion
-    $.each( menudata.list[sid], function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
+    $.each( menudata.list[sid].slice(0, listlength), function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
     
     // opret carousel
     carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular' });
@@ -154,7 +156,7 @@ $(document).ready(function(){
   create_menu();
     
   // imagebanner
-  show_imagebanner(menudata.first, 30);
+  show_imagebanner(menudata.first);
 
   // set øvrige events op
   init_movements();
