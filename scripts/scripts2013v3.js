@@ -207,7 +207,7 @@ $(document).ready(function(){
     });
 
     // inaktiv-checkeren...
-    setInterval(function() { idleTime+= 5; if(idleTime>10) { idleTime=0; $("#slider-arrow-right").click();} }, 5000);
+    setInterval(function() { idleTime+= 5; if(idleTime>10) { idleTime=0; $('.jcarousel-next').click();} }, 5000);
 
     $("body").mousemove(function (e) {
         idleTime = 0;
