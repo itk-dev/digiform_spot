@@ -16,12 +16,8 @@ Array.prototype.shuffle = function () {
 
 function show_imagebanner (sid, maxele) {
 
-    if (!sid) return;
-
     // HACK: try not to initialize more than one image_banner on the same time
     if (imageflowObj && imageflowObj.firstRefresh) return;
-
-    $('#menu').menu("collapseAll", null, true);
 
     // bland listen af numre
     menudata.list[sid].shuffle();
@@ -108,7 +104,7 @@ function create_menu(){
   $('#menucontainer').html(s);
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
-  $.each( menudata.list, function( key, value ) { $('#menu_' + key).click( function() { show_imagebanner(key);return false;} ) });
+  $.each( menudata.list, function( key, value ) { $('#menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_imagebanner(key);return false;} ) });
 }
 
 function show_popupbox(ele) {
