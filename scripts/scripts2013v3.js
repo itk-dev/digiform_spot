@@ -33,7 +33,7 @@ function show_imagebanner (sid) {
       // menudata og booktable har data fra forskellige kilder
       var e = booktable[id];
       if(e) {
-        s += '<li><img src="' + imagefolder + e.i + '" id="isbn_' + id + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
+        s += '<li id="isbn_' + id + '"><img src="' + imagefolder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
         bredde += +e.w + 36;
         if ( e.h>hojde) hojde=+e.h
       }
@@ -44,23 +44,22 @@ function show_imagebanner (sid) {
     $(el).html(s);
 
     // slet tidligere carousel - er det nødvendigt?
-    if(carouselObj) $('.jcarousel').jcarousel('destroy');  
-    
-    // overfør data 
+    if(carouselObj) $('.jcarousel').jcarousel('destroy');
+
+    // overfør data
     $('.jcarousel').html(el);
 
     // tildel click-funktion
     $.each( menudata.list[sid].slice(0, listlength), function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
-    
+
     // opret carousel
     carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular' });
-    
 }
 
 function init_movements() {
 
-    $('.jcarousel-prev').click(function() { $('.jcarousel').jcarousel('scroll', '-=1'); });
-    $('.jcarousel-next').click(function() { $('.jcarousel').jcarousel('scroll', '+=1'); });    
+    $('.jcarousel-prev').click(function() { $('.jcarousel').jcarousel('scroll', '-=1'); return false; });
+    $('.jcarousel-next').click(function() { $('.jcarousel').jcarousel('scroll', '+=1'); return false; });
 
     // swipe
     $("body").touchwipe({
@@ -154,7 +153,7 @@ $(document).ready(function(){
 
   // menuen
   create_menu();
-    
+
   // imagebanner
   show_imagebanner(menudata.first);
 
