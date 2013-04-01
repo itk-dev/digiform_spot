@@ -1,15 +1,7 @@
-/*
-    Document   : spot.css
-    Created on : 20-10-2011, 11:31:40
-    Author     : azkb073
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
 
 /* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
@@ -25,291 +17,280 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
+display: block;
 }
 body {
-	line-height: 1;
+line-height: 1;
 }
 ol, ul {
-	list-style: none;
+list-style: none;
 }
 blockquote, q {
-	quotes: none;
+quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+content: '';
+content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+border-collapse: collapse;
+border-spacing: 0;
 }
 
 root {
-  display: block;
+display: block;
 }
 
 html {
-  height: 100%;
+height: 100%;
 }
 
-/* ------------------  */
+/* ------------------ */
 
 body {
-  background: url('../images/body-bg.png') repeat;
-  min-height: 100%;
-  width: 100%;
+background: url('../images/body-bg.png') repeat;
+min-height: 100%;
+width: 100%;
 }
 
 .wrapper {
-  width: 100%;
+width: 100%;
 }
 
 .body-header {
-  position: relative;
-  background-color: #be1f24;
-  height: 114px;
-  top:00px;
+position: relative;
+background-color: #be1f24;
+height: 114px;
+top:0px;
+}
+
+.slogan {
+color: #ffffff;
+right: 10px;
+bottom:10px;
+position: absolute;
+overflow: hidden;
 }
 
 @media (min-width: 600px){
-  .slogan {
-    /*background: url('../images/slogan.png') no-repeat;*/
-    font: 1.2em  Arial,Helvetica,sans-serif ;
-    color: #ffffff;
-    right: 10px;
-    bottom:10px;
-    position: absolute;
-    overflow: hidden;
-  }
+.slogan {
+font: 1.2em Arial,Helvetica,sans-serif ;
+}
 }
 @media (max-width: 600px){
-  .slogan {
-    /*background: url('../images/slogan.png') no-repeat;*/
-    font: .5em  Arial,Helvetica,sans-serif ;
-    color: #ffffff;
-    right: 10px;
-    bottom:10px;
-    position: absolute;
-    overflow: hidden;
-  }
-
-  .popup-wrapper {
-    font-size: .9em;
-    width: 100%;
-  }
+.slogan {
+font: .5em Arial,Helvetica,sans-serif ;
 }
 
-#main  {
-  width:100%;
-  top: -25px;
-  /*position: absolute;*/
-  margin: 0px auto;
+.popup-wrapper {
+font-size: .9em;
+width: 100%;
 }
+}
+
 
 .logo {
-  background: url('../images/e-reolen.png') no-repeat;
-  width: 352px;
-  height: 100%;
-  float: left;
-  margin-left:31px;
-  cursor: pointer;
-  cursor: hand;
+background: url('../images/e-reolen.png') no-repeat;
+width: 352px;
+height: 100%;
+float: left;
+margin-left:31px;
+cursor: pointer;
+cursor: hand;
 }
 
 .content {
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  width: 100%;
+overflow: hidden;
+position: relative;
+text-align: center;
+width: 100%;
 }
 
 .slider-arrow-left,
 .slider-arrow-right {
-  position: absolute;
-  top: 45%;
-  width: 8%;
-  z-index: 200;
+position: absolute;
+top: 45%;
+z-index: 200;
 
 }
 
 .slider-arrow-left img,
 .slider-arrow-right img {
-  max-width: 100%;
+max-width: 100%;
 }
 
 .slider-arrow-left {
-  left: 2%;
-  cursor: pointer;
-  cursor: hand;
+left: 20px;
+cursor: pointer;
+cursor: hand;
 }
 
 .slider-arrow-right {
-  right: 0%;
-  cursor: pointer;
-  cursor: hand;
+right: 20px;
+cursor: pointer;
+cursor: hand;
 }
 
 input.ui-widget-content {
-  top: 25%;
+top: 25%;
 }
 .green-gradient {
-  background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000));
+background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000));
 }
 .green-button {
-  height: 42px;
-  padding: 0 15px 0 15px;
-  color: #446c12;
-  font-size: 1em;
-  font-weight: bold;
-  border: 1px solid #b5db87;
-  background-color: #baf05e;
-	background: -webkit-gradient(linear, left top, left bottom, from(#baf05e), to(#62b200));
-	background: -moz-linear-gradient(top, #baf05e, #62b200);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#baf05e', endColorstr='#62b200');
+height: 42px;
+padding: 0 15px 0 15px;
+color: #446c12;
+font-size: 1em;
+font-weight: bold;
+border: 1px solid #b5db87;
+background-color: #baf05e;
+background: -webkit-gradient(linear, left top, left bottom, from(#baf05e), to(#62b200));
+background: -moz-linear-gradient(top, #baf05e, #62b200);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#baf05e', endColorstr='#62b200');
 
-	/*text-shadow: 0 1px 1px rgba(0,0,0,.3);*/
-	text-shadow: 0px 1px #b5db87, -0px -1px rgba(0,0,0,.3);
-	-webkit-border-radius: .2em;
-	-moz-border-radius: .2em;
-	border-radius: .2em;
+/*text-shadow: 0 1px 1px rgba(0,0,0,.3);*/
+text-shadow: 0px 1px #b5db87, -0px -1px rgba(0,0,0,.3);
+-webkit-border-radius: .2em;
+-moz-border-radius: .2em;
+border-radius: .2em;
 
-  cursor: pointer;
-  cursor: hand;
+cursor: pointer;
+cursor: hand;
 }
 
 .desc {
-  font-size: 90%
+font-size: 90%
 }
 
 .email-text {
-  margin:0px;
-  text-align:left;
+margin:0px;
+text-align:left;
 }
 .email-text.tiny{
-  font-size: 80%;
+font-size: 80%;
 }
 
 .form-email-felt {
-  text-align:center;
-  width: 98%;
-  height: 40px;
-  border-color: #666;
+text-align:center;
+width: 98%;
+height: 40px;
+border-color: #666;
 }
 .form-email p{
-  margin-top: 10px;
+margin-top: 10px;
 }
 
 .form-email {
-  position: absolute;
-  bottom: 10px;
-  text-align: left;
+position: absolute;
+bottom: 10px;
+text-align: left;
 }
 
 .popup-form {
-  font-family: Arial,Helvetica,sans-serif;
-  font-size: .9em;
-  line-height: 150%;
-  margin: 5px;
-  width: 352px;
-  height: 450px;
-  color:#000;
+font-family: Arial,Helvetica,sans-serif;
+font-size: .9em;
+line-height: 150%;
+margin: 5px;
+width: 352px;
+height: 450px;
+color:#000;
 }
 .popup-form h3 {
-  font-weight: bold;
+font-weight: bold;
 }
 
 .submit {
-  text-align: right;
-  margin-right: 2px;
+text-align: right;
+margin-right: 2px;
 }
 
 .message-info {
-  background: #c1d3ee url('../images/icon-info.png') no-repeat 5% 50%;
-  border: 1px solid #5589d8;
-  height: 50px;
-  width: 100%;
-  display: table;
+background: #c1d3ee url('../images/icon-info.png') no-repeat 5% 50%;
+border: 1px solid #5589d8;
+height: 50px;
+width: 100%;
+display: table;
 }
 
 .message-info p{
-  padding-left: 50px;
-  display: table-cell;
-  vertical-align: middle;
+padding-left: 50px;
+display: table-cell;
+vertical-align: middle;
 }
 
 .message-success {
-  background: #c4ecc4 url('../images/icon-success.png') no-repeat 5% 50%;
-  border: 1px solid #257325;
-  height: 50px;
-  width: 100%;
-  display: table;
+background: #c4ecc4 url('../images/icon-success.png') no-repeat 5% 50%;
+border: 1px solid #257325;
+height: 50px;
+width: 100%;
+display: table;
 }
 
 .message-success p{
- padding-left: 50px;
-  display: table-cell;
-  vertical-align: middle;
+padding-left: 50px;
+display: table-cell;
+vertical-align: middle;
 }
 
 .message-error {
-  background: #f7c4c4 url('../images/icon-error.png') no-repeat 5% 50%;
-  border: 1px solid #d92222;
-  height: 50px;
-  width: 100%;
-  display: table;
+background: #f7c4c4 url('../images/icon-error.png') no-repeat 5% 50%;
+border: 1px solid #d92222;
+height: 50px;
+width: 100%;
+display: table;
 }
 
 .message-error p{
-  display: table-cell;
-  vertical-align: middle;
-  padding-left: 50px;
+display: table-cell;
+vertical-align: middle;
+padding-left: 50px;
 }
 
 * { font-family:verdana, arial, helvetica, sans-serif; }
 
-#bookdata img 	{ width: 100px;height:auto;float:left;padding:0 5px 5px 0; }
+#bookdata img { width: 100px;height:auto;float:left;padding:0 5px 5px 0; }
 
-#myform {  clear:both;}
+#myform { clear:both;}
 
-label 			{ width: 4em; float: left; text-align: right; margin-right: 0.5em; display: block }
-.submit input 	{ margin-left: 4.5em; }
+label { width: 4em; float: left; text-align: right; margin-right: 0.5em; display: block }
+.submit input { margin-left: 4.5em; }
 
 root {
-  display: block;
+display: block;
 }
 
 .fancybox-wrap {
-  margin: 0;
-  z-index: 20000;
+margin: 0;
+z-index: 20000;
 }
 
 .fancybox-inner {
-  overflow: hidden;
+overflow: hidden;
 }
 
 #fancybox-close {
-	position: absolute;
-	top: -15px;
-	right: -15px;
-	width: 50px;
-	height: 50px;
-	background-image: url('../images/fancy_close.png');
-	background-position: -0px 0px;
-	cursor: pointer;
-	z-index: 1103;
-	display: none;
+position: absolute;
+top: -15px;
+right: -15px;
+width: 50px;
+height: 50px;
+background-image: url('../images/fancy_close.png');
+background-position: -0px 0px;
+cursor: pointer;
+z-index: 1103;
+display: none;
 }
 
 .ui-keyboard{ padding: .3em; /*position: absolute; z-index: 30000;*/}
@@ -318,42 +299,41 @@ root {
 .ui-keyboard-actionkey{width: 6em;}
 .ui-keyboard-space{width: 20em;}
 
-
 #menucontainer{ height:40px; background-color:black; }
-#menu { position:relative; z-index: 5000; margin-left: auto ;  margin-right: auto ; width:600px;}
+#menu { position:relative; z-index: 5000; margin-left: auto ; margin-right: auto ; width:600px;}
 #menu li { display:inline-block; width: auto; }
 #menu li.sub { display:block; width: auto;}
-#menu  > .ui-menu-item { width: 150px;background: #000; }
+#menu > .ui-menu-item { width: 150px;background: #000; }
 .ui-widget-content { border: none; background:#000; }
 
 #imagecontainer {
-    margin: 0 auto;
-    padding:30px 120px 0 120px;
-    position: relative;
+margin: 0 auto;
+padding:30px 120px 30px 120px;
+position: relative;
+height: 510px;
 }
 
 .jcarousel {
-    position: relative;
-    overflow: hidden;
-    height: 600px;
+position: relative;
+overflow: hidden;
+height: 510px;
 }
 
 .jcarousel ul {
-    width: 40000px;
-    position: absolute;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+width: 40000px;
+position: absolute;
+list-style: none;
+margin: 0;
+padding: 0;
 }
 
 .jcarousel li {
-    float: left;
-    padding: 0 40px;
+float: left;
+padding: 0 80px 0 0;
 }
 
 .jcarousel img {
-  border:3px solid #fff;
-  max-width:330px;
-  
+border:3px solid #fff;
+max-width:330px;
+width:330px;
 }
-
