@@ -2,7 +2,7 @@
 var imagefolder='http://images.spot.ereolen.dk/books/';
 var idleTime = 0;
 var carouselObj;
-var maxImagesInList = 100;
+var maxImagesInList = 75;
 
 Array.prototype.shuffle = function () {
   for (var i = this.length - 1; i > 0; i--) {
@@ -27,18 +27,14 @@ function show_imagebanner (sid) {
     }
 
     var s='';
-    var bredde=0,hojde=0;
     for ( var k = 0; k < listlength; k++){
       var id = menudata.list[sid][k];
       // menudata og booktable har data fra forskellige kilder
       var e = booktable[id];
       if(e) {
         s += '<li id="isbn_' + id + '"><img src="' + imagefolder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
-        bredde += +e.w + 36;
-        if ( e.h>hojde) hojde=+e.h
       }
     }
-    //console.log('B='+bredde+' H='+hojde)
 
     var el = document.createElement('ul');
     $(el).html(s);
@@ -54,6 +50,13 @@ function show_imagebanner (sid) {
 
     // opret carousel
     carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular' });
+}
+
+function menubanner_padding() {
+
+  var height_to_images = $('.wrapper').outerHeight() - $('.body-header').outerHeight() - $('#menucontainer').outerHeight();
+  var extra_padding = Math.floor(( height_to_images - $('#imagecontainer').height() ) /2 );
+  $('#imagecontainer').css('padding-top', extra_padding);
 }
 
 function init_movements() {
@@ -101,28 +104,28 @@ function create_menu(){
 
 function show_popupbox(isbn) {
 
-	// rydop
-	$('#result').html('');
-	$('input:text').val('');
+  // rydop
+  $('#result').html('');
+  $('input:text').val('');
 
   //
   if (booktable[isbn].d == null) {
     booktable[isbn].d = '';
   }
 
-	$('#bookdata').html( '<div><h3>' + booktable[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + booktable[isbn].i + '" />' + booktable[isbn].d + '</div>');
+  $('#bookdata').html( '<div><h3>' + booktable[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + booktable[isbn].i + '" />' + booktable[isbn].d + '</div>');
 
-	// gem values i formen
-	$('#isbn').val(isbn);
-	$('#titel').val(booktable[isbn].t);
-	$('#type').val(booktable[isbn].s);
+  // gem values i formen
+  $('#isbn').val(isbn);
+  $('#titel').val(booktable[isbn].t);
+  $('#type').val(booktable[isbn].s);
 
     // vis boksen (ifald den tidligere er fadeout
   $('#popup').show();  // hide efter submit 4 sek
-	$('#myform').show(); // hide efter submit
+  $('#myform').show(); // hide efter submit
 
-	// sæt fancyboks op og aktiver den
-	$("#inline").fancybox().click();
+  // sæt fancyboks op og aktiver den
+  $("#inline").fancybox().click();
 
 }
 
@@ -157,11 +160,15 @@ $(document).ready(function(){
   // imagebanner
   show_imagebanner(menudata.first);
 
+  // add padding to imagebanner
+  menubanner_padding();
+  $(window).on('resize', menubanner_padding);
+
   // set øvrige events op
   init_movements();
 
   // submit
-	$("form").submit(function() {
+  $("form").submit(function() {
 
       // meget simpel emailvalidering
       if ( this.param1.value.search(/.*@.*/) == -1 ) {
