@@ -54,8 +54,12 @@ function show_imagebanner (sid) {
     // tildel click-funktion
     $.each( menudata.list[sid].slice(0, listlength), function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
 
-    // opret carousel
-    carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular' });
+    // opret carousel - animation http://jqueryui.com/effect/#easing
+    carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 800, 'easing':   'easeOutExpo'  } });
+    
+    // $('.jcarousel').delegate('li', 'itemfirstout.jcarousel', function(event, carousel) {
+        // console.log( booktable[$(this).attr('id').slice(5)].t );
+    // });    
 }
 
 
@@ -67,16 +71,16 @@ function menubanner_padding() {
  
   var banner_width = $('.jcarousel').outerWidth(true); 
   var new_width = banner_width / number_of_images;
-  var image_padding = Math.floor( new_width * space_between_images );
   
-  var new_image_width = Math.floor( new_width - image_padding )
+  var new_image_margin = Math.floor( new_width * space_between_images );
+  var new_image_width = Math.floor( new_width - new_image_margin )
   var new_image_height =  Math.floor( new_image_width * max_image_height / max_image_width )
   
-  var new_banner_width = number_of_images * ( new_image_width + 2 * image_border ) + ( number_of_images -1 ) * image_padding
-  
+  var new_banner_width = number_of_images * ( new_image_width + 2 * image_border ) + ( number_of_images -1 ) * new_image_margin
   var banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
-  
-  $('.jcarousel img').css( { 'margin-right' : image_padding, 'max-width' : new_image_width, 'max-height' : new_image_height, 'height' : new_image_height } );
+
+  //console.log(banner_width+' '+ new_banner_width +' '+ new_image_margin+' '+new_image_width+' '+new_image_height+' '+banner_margin);
+  $('.jcarousel img').css( { 'margin-right' : new_image_margin, 'width' : new_image_width, 'height' : new_image_height } );
   $('.jcarousel').css( { 'height' : new_image_height + 2 * image_border, 'margin-left' : banner_margin, 'margin-right' : banner_margin } );
 }
 
