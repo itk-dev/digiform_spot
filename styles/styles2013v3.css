@@ -119,26 +119,26 @@ text-align: center;
 width: 100%;
 }
 
-.slider-arrow-left,
-.slider-arrow-right {
+.imagebanner-left,
+.imagebanner-right {
 position: absolute;
 top: 45%;
 z-index: 200;
 
 }
 
-.slider-arrow-left img,
-.slider-arrow-right img {
+.imagebanner-left img,
+.imagebanner-right img {
 max-width: 100%;
 }
 
-.slider-arrow-left {
+.imagebanner-left {
 left: 20px;
 cursor: pointer;
 cursor: hand;
 }
 
-.slider-arrow-right {
+.imagebanner-right {
 right: 20px;
 cursor: pointer;
 cursor: hand;
@@ -314,13 +314,13 @@ padding:30px 120px 30px 120px;
 position: relative;
 }
 
-.jcarousel {
+.imagebanner {
 position: relative;
 overflow: hidden;
 height: 506px;
 }
 
-.jcarousel ul {
+.imagebanner ul {
 width: 40000px;
 position: absolute;
 list-style: none;
@@ -328,11 +328,11 @@ margin: 0;
 padding: 0;
 }
 
-.jcarousel li {
+.imagebanner li {
 float: left;
 }
 
-.jcarousel img {
+.imagebanner img {
 border:3px solid #fff;
 margin: 0 80px 0 0;
 }

@@ -1,5 +1,6 @@
 
 var imagefolder='http://images.spot.ereolen.dk/books/';
+
 var idleTime = 0;
 var carouselObj;
 var maxImagesInList = 75;
@@ -20,19 +21,19 @@ Array.prototype.shuffle = function () {
   return this;
 }
 
-
-function show_imagebanner (sid) {
+function show_banner (sid) {
 
     // bland listen af numre
     menudata.list[sid].shuffle();
 
     // haandter visning af maxelementer
     var listlength = menudata.list[sid].length
-    if ( listlength>maxImagesInList ) {
-      listlength=maxImagesInList;
+    if ( listlength > maxImagesInList ) {
+      listlength = maxImagesInList;
     }
 
-    var s='';
+    // create banner-html
+    var s = '';
     for ( var k = 0; k < listlength; k++){
       var id = menudata.list[sid][k];
       // menudata og booktable har data fra forskellige kilder
@@ -46,54 +47,53 @@ function show_imagebanner (sid) {
     $(el).html(s);
 
     // slet tidligere carousel - er det nødvendigt?
-    if(carouselObj) $('.jcarousel').jcarousel('destroy');
+    if(carouselObj) $('.imagebanner').jcarousel('destroy');
 
     // overfør data
-    $('.jcarousel').html(el);
+    $('.imagebanner').html(el);
 
     // tildel click-funktion
     $.each( menudata.list[sid].slice(0, listlength), function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
 
     // opret carousel - animation http://jqueryui.com/effect/#easing
-    carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 800, 'easing':   'easeOutExpo'  } });
-    
-    // $('.jcarousel').delegate('li', 'itemfirstout.jcarousel', function(event, carousel) {
+    carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 800, 'easing':   'easeOutExpo'  } });
+
+    // $('.imagebanner').delegate('li', 'itemfirstout.jcarousel', function(event, carousel) {
         // console.log( booktable[$(this).attr('id').slice(5)].t );
-    // });   
-    menubanner_padding();    
+    // });
+    banner_recalculate();
 }
 
+function banner_recalculate() {
 
-function menubanner_padding() {
+  var banner_height = $('.wrapper').outerHeight() - $('.body-header').outerHeight() - $('#menucontainer').outerHeight();
+  var banner_padding_top = Math.floor(( banner_height - $('#imagecontainer').height() ) /2 );
+  $('#imagecontainer').css('padding-top', banner_padding_top);
 
-  var height_to_images = $('.wrapper').outerHeight() - $('.body-header').outerHeight() - $('#menucontainer').outerHeight();
-  var extra_padding = Math.floor(( height_to_images - $('#imagecontainer').height() ) /2 );
-  $('#imagecontainer').css('padding-top', extra_padding);
- 
-  var banner_width = $('.jcarousel').outerWidth(true); 
+  var banner_width = $('.imagebanner').outerWidth(true);
   var new_width = banner_width / number_of_images;
-  
+
   var new_image_margin = Math.floor( new_width * space_between_images );
   var new_image_width = Math.floor( new_width - new_image_margin )
   var new_image_height =  Math.floor( new_image_width * max_image_height / max_image_width )
-  
+
   var new_banner_width = number_of_images * ( new_image_width + 2 * image_border ) + ( number_of_images -1 ) * new_image_margin
   var banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
 
   //console.log(banner_width+' '+ new_banner_width +' '+ new_image_margin+' '+new_image_width+' '+new_image_height+' '+banner_margin);
-  $('.jcarousel img').css( { 'margin-right' : new_image_margin, 'width' : new_image_width, 'height' : new_image_height } );
-  $('.jcarousel').css( { 'height' : new_image_height + 2 * image_border, 'margin-left' : banner_margin, 'margin-right' : banner_margin } );
+  $('.imagebanner img').css( { 'margin-right' : new_image_margin, 'width' : new_image_width, 'height' : new_image_height } );
+  $('.imagebanner').css( { 'height' : new_image_height + 2 * image_border, 'margin-left' : banner_margin, 'margin-right' : banner_margin } );
 }
 
-function init_movements() {
+function create_events() {
 
-    $('.jcarousel-prev').click(function() { idleTime=0; $('.jcarousel').jcarousel('scroll', '-=1'); return false; });
-    $('.jcarousel-next').click(function() { idleTime=0; $('.jcarousel').jcarousel('scroll', '+=1'); return false; });
+    $('.imagebanner-left').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '-=1'); return false; });
+    $('.imagebanner-right').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '+=1'); return false; });
 
     // swipe
     $("body").touchwipe({
-           wipeLeft: function() { $('.jcarousel-next').click(); },
-           wipeRight: function() { $('.jcarousel-prev').click(); },
+           wipeLeft: function() { $('.imagebanner-right').click(); },
+           wipeRight: function() { $('.imagebanner-left').click(); },
          //  wipeUp: function() { alert("up"); },
          //  wipeDown: function() { alert("down"); },
            min_move_x: 20,
@@ -102,15 +102,13 @@ function init_movements() {
       });
 
     // inaktiv-checkeren...
-    setInterval(function() { idleTime+= 5; if(idleTime>10) { $('.jcarousel-next').click();} }, 5000);
+    setInterval(function() { idleTime+= 5; if(idleTime>10) { $('.imagebanner-right').click();} }, 5000);
+    $("body").on('mousemove', function (e) { idleTime = 0; });
+    $("body").on('keypress',  function (e) { idleTime = 0; });
 
-    $("body").mousemove(function (e) {
-        idleTime = 0;
-    });
-    $("body").keypress(function (e) {
-        idleTime = 0;
-    });      
-      
+    // resize will trigger new size of banner
+    $(window).on('resize', banner_recalculate);
+
 }
 
 function create_menu(){
@@ -135,7 +133,7 @@ function create_menu(){
   $('#menucontainer').html(s);
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
-  $.each( menudata.list, function( key, value ) { $('#menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_imagebanner(key);return false;} ) });
+  $.each( menudata.list, function( key, value ) { $('#menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key);return false;} ) });
 }
 
 function show_popupbox(isbn) {
@@ -194,13 +192,10 @@ $(document).ready(function(){
   create_menu();
 
   // imagebanner
-  show_imagebanner(menudata.first);
+  show_banner(menudata.first);
 
-  // add padding to imagebanner
-  $(window).on('resize', menubanner_padding);
-
-  // set øvrige events op
-  init_movements();
+  // initialiser evetns
+  create_events();
 
   // submit
   $("form").submit(function() {
@@ -243,7 +238,6 @@ $(document).ready(function(){
           error: function(jqXHR, textmsg) {
                 $('#result').html('<div class="message-error"><p>Der er sket en hændelsestype: ' + textmsg + ' , prøv igen.</p></div>');
               }
-
 
         });
       return false;
