@@ -59,7 +59,8 @@ function show_imagebanner (sid) {
     
     // $('.jcarousel').delegate('li', 'itemfirstout.jcarousel', function(event, carousel) {
         // console.log( booktable[$(this).attr('id').slice(5)].t );
-    // });    
+    // });   
+    menubanner_padding();    
 }
 
 
@@ -196,7 +197,6 @@ $(document).ready(function(){
   show_imagebanner(menudata.first);
 
   // add padding to imagebanner
-  menubanner_padding();
   $(window).on('resize', menubanner_padding);
 
   // set øvrige events op
