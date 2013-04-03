@@ -118,7 +118,8 @@ input.ui-widget-content { top: 25%; }
   background-color: #baf05e;
   background: -webkit-gradient(linear, left top, left bottom, from(#baf05e), to(#62b200));
   background: -moz-linear-gradient(top, #baf05e, #62b200);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#baf05e', endColorstr='#62b200');
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#baf05e, endColorstr=#62b200);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#baf05e, endColorstr=#62b200)";
 
   text-shadow: 0px 1px #b5db87, -0px -1px rgba(0,0,0,.3);
   -webkit-border-radius: .2em;
