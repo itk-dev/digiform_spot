@@ -139,7 +139,7 @@ function create_menu(){
 function show_popupbox(isbn) {
 
   // rydop
-  $('#result').html('');
+  $('#message').html('');
   $('input:text').val('');
 
   //
@@ -203,7 +203,7 @@ $(document).ready(function(){
       // meget simpel emailvalidering
       if ( this.param1.value.search(/.*@.*/) == -1 ) {
          this.param1.focus();
-         $('#result').html('<div class="message-info"><p>Skriv din email adresse</p></div>');
+         $('#message').html('<div class="message-info"><p>Skriv din email adresse</p></div>');
          return false;
       }
 
@@ -219,10 +219,10 @@ $(document).ready(function(){
               // vis resultat
 
               if (data == "1") {
-                $('#result').html('<div class="message-success"><p>Din email er sendt.</p></div>');
+                $('#message').html('<div class="message-success"><p>Din email er sendt.</p></div>');
               }
               else {
-                $('#result').html('<div class="message-error"><p>Der er sket en fejl, prøv igen.</p></div>');
+                $('#message').html('<div class="message-error"><p>Der er sket en fejl, prøv igen.</p></div>');
               }
 
               // skjul formularen
@@ -236,7 +236,7 @@ $(document).ready(function(){
               },
           dataType: 'html',
           error: function(jqXHR, textmsg) {
-                $('#result').html('<div class="message-error"><p>Der er sket en hændelsestype: ' + textmsg + ' , prøv igen.</p></div>');
+                $('#message').html('<div class="message-error"><p>Der er sket en hændelsestype: ' + textmsg + ' , prøv igen.</p></div>');
               }
 
         });
