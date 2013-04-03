@@ -93,7 +93,6 @@ body {
   float: left;
   margin-left:31px;
   cursor: pointer;
-  cursor: hand;
 }
 
 .content {
@@ -108,6 +107,7 @@ input.ui-widget-content { top: 25%; }
 .green-gradient {
   background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000));
 }
+
 .green-button {
   height: 42px;
   padding: 0 15px 0 15px;
@@ -120,14 +120,11 @@ input.ui-widget-content { top: 25%; }
   background: -moz-linear-gradient(top, #baf05e, #62b200);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#baf05e', endColorstr='#62b200');
 
-  /*text-shadow: 0 1px 1px rgba(0,0,0,.3);*/
   text-shadow: 0px 1px #b5db87, -0px -1px rgba(0,0,0,.3);
   -webkit-border-radius: .2em;
   -moz-border-radius: .2em;
   border-radius: .2em;
-
   cursor: pointer;
-  cursor: hand;
 }
 
 .form-email input[type="text"] {
@@ -251,9 +248,9 @@ input.ui-widget-content { top: 25%; }
 .imagebanner-left img,
 .imagebanner-right img { max-width: 100%; }
 
-.imagebanner-left { left: 20px; cursor: pointer; cursor: hand; }
+.imagebanner-left { left: 20px; cursor: pointer; }
 
-.imagebanner-right { right: 20px; cursor: pointer; cursor: hand; }
+.imagebanner-right { right: 20px; cursor: pointer; }
 
 .imagebanner {
   position: relative;
