@@ -4,6 +4,12 @@ var idleTime = 0;
 var carouselObj;
 var maxImagesInList = 75;
 
+var max_image_width = 330;
+var max_image_height = 500;
+var image_border = 3;
+var space_between_images = 0.20; // procent
+var number_of_images = 3;
+
 Array.prototype.shuffle = function () {
   for (var i = this.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -52,11 +58,26 @@ function show_imagebanner (sid) {
     carouselObj = $('.jcarousel').jcarousel({ 'wrap': 'circular' });
 }
 
+
 function menubanner_padding() {
 
   var height_to_images = $('.wrapper').outerHeight() - $('.body-header').outerHeight() - $('#menucontainer').outerHeight();
   var extra_padding = Math.floor(( height_to_images - $('#imagecontainer').height() ) /2 );
   $('#imagecontainer').css('padding-top', extra_padding);
+ 
+  var banner_width = $('.jcarousel').outerWidth(true); 
+  var new_width = banner_width / number_of_images;
+  var image_padding = Math.floor( new_width * space_between_images );
+  
+  var new_image_width = Math.floor( new_width - image_padding )
+  var new_image_height =  Math.floor( new_image_width * max_image_height / max_image_width )
+  
+  var new_banner_width = number_of_images * ( new_image_width + 2 * image_border ) + ( number_of_images -1 ) * image_padding
+  
+  var banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
+  
+  $('.jcarousel img').css( { 'margin-right' : image_padding, 'max-width' : new_image_width, 'max-height' : new_image_height, 'height' : new_image_height } );
+  $('.jcarousel').css( { 'height' : new_image_height + 2 * image_border, 'margin-left' : banner_margin, 'margin-right' : banner_margin } );
 }
 
 function init_movements() {
