@@ -113,7 +113,7 @@ function create_events() {
 
 function create_menu(){
 
-  var make_item = function(ele){ return '<a href="#"' + ( ele.sid ? ' id="menu_' + ele.sid : ' class="nolink"' ) + '">'+ ele.label +'</a>'; }
+  var make_item = function(ele){ return '<a href="#" ' + ( ele.sid ? 'id="menu_' + ele.sid : 'class="nolink"' ) + '">'+ ele.label +'</a>'; }
 
   var s = '<ul id="menu">'
   for ( var i = 0; i < menudata.menu.length; i++) {
