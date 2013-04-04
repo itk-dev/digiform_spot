@@ -113,7 +113,7 @@ function create_events() {
 
 function create_menu(){
 
-  var make_item = function(ele){ return '<a href="#"' + ( ele.sid ? ' id="menu_' + ele.sid : '' ) + '">'+ ele.label +'</a>'; }
+  var make_item = function(ele){ return '<a href="#"' + ( ele.sid ? ' id="menu_' + ele.sid : ' class="nolink"' ) + '">'+ ele.label +'</a>'; }
 
   var s = '<ul id="menu">'
   for ( var i = 0; i < menudata.menu.length; i++) {
@@ -134,6 +134,7 @@ function create_menu(){
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
   $.each( menudata.list, function( key, value ) { $('#menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key);return false;} ) });
+  $('.nolink').click( function() { return false });
 }
 
 function show_popupbox(isbn) {
