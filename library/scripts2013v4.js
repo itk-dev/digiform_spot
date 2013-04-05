@@ -66,10 +66,6 @@ function show_banner (sid) {
 
 function banner_recalculate() {
 
-  var banner_height = $('.wrapper').outerHeight() - $('.body-header').outerHeight() - $('#menucontainer').outerHeight();
-  var banner_padding_top = Math.floor(( banner_height - $('#imagecontainer').height() ) /2 );
-  $('#imagecontainer').css('padding-top', banner_padding_top);
-
   var banner_width = $('.imagebanner').outerWidth(true);
   var new_width = banner_width / number_of_images;
 
@@ -78,11 +74,17 @@ function banner_recalculate() {
   var new_image_height =  Math.floor( new_image_width * max_image_height / max_image_width )
 
   var new_banner_width = number_of_images * ( new_image_width + 2 * image_border ) + ( number_of_images -1 ) * new_image_margin
-  var banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
+  var new_banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
+  var new_banner_height = new_image_height + 2 * image_border
 
-  //console.log(banner_width+' '+ new_banner_width +' '+ new_image_margin+' '+new_image_width+' '+new_image_height+' '+banner_margin);
+  //console.log(banner_width+' '+ new_banner_width +' '+ new_image_margin+' '+new_image_width+' '+new_image_height+' '+new_banner_margin);
   $('.imagebanner img').css( { 'margin-right' : new_image_margin, 'width' : new_image_width, 'height' : new_image_height } );
-  $('.imagebanner').css( { 'height' : new_image_height + 2 * image_border, 'margin-left' : banner_margin, 'margin-right' : banner_margin } );
+  $('.imagebanner').css( { 'height' : new_banner_height, 'margin-left' : new_banner_margin, 'margin-right' : new_banner_margin } );
+
+  var banner_height = $('.wrapper').outerHeight() - $('.body-header').outerHeight() - $('#menucontainer').outerHeight();
+  var banner_padding = Math.floor(( banner_height - new_banner_height ) /2 );
+  $('#imagecontainer').css( { 'padding-top' : banner_padding, 'padding-bottom' : banner_padding });
+  
 }
 
 function create_events() {
