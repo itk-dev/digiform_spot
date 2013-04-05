@@ -65,6 +65,7 @@ function show_banner (sid) {
 }
 
 function banner_recalculate() {
+  // setting the height/width/margin of images, padding of the image container when resizing/new search og initialize
 
   var banner_width = $('.imagebanner').outerWidth(true);
   var new_width = banner_width / number_of_images;
@@ -77,7 +78,6 @@ function banner_recalculate() {
   var new_banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
   var new_banner_height = new_image_height + 2 * image_border
 
-  //console.log(banner_width+' '+ new_banner_width +' '+ new_image_margin+' '+new_image_width+' '+new_image_height+' '+new_banner_margin);
   $('.imagebanner img').css( { 'margin-right' : new_image_margin, 'width' : new_image_width, 'height' : new_image_height } );
   $('.imagebanner').css( { 'height' : new_banner_height, 'margin-left' : new_banner_margin, 'margin-right' : new_banner_margin } );
 
@@ -114,7 +114,7 @@ function create_events() {
 
 function create_menu(){
 
-  var make_item = function(ele){ return '<a href="#" ' + ( ele.sid ? 'id="menu_' + ele.sid : 'class="nolink"' ) + '">'+ ele.label +'</a>'; }
+  var make_item = function(ele){ return '<a href="#" class="menu_' + ( ele.sid ? ele.sid : 'nolink' ) + '">'+ ele.label +'</a>'; }
 
   var s = '<ul id="menu">'
   for ( var i = 0; i < menudata.menu.length; i++) {
@@ -134,8 +134,8 @@ function create_menu(){
   $('#menucontainer').html(s);
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
-  $.each( menudata.list, function( key, value ) { $('#menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key);return false;} ) });
-  $('.nolink').click( function() { return false });
+  $.each( menudata.list, function( key, value ) { $('.menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key); return false} ) });
+  $('.menu_nolink' ).click( function() { return false });
 }
 
 function show_popupbox(isbn) {
