@@ -22,25 +22,23 @@ Array.prototype.shuffle = function () {
 }
 
 function show_banner (sid) {
-
+    var current_banner; // maybe global variable later
+    
     // bland listen af numre
     menudata.list[sid].shuffle();
 
-    // haandter visning af maxelementer
-    var listlength = menudata.list[sid].length
-    if ( listlength > maxImagesInList ) {
-      listlength = maxImagesInList;
-    }
-
     // create banner-html
+    current_banner = []
     var s = '';
-    for ( var k = 0; k < listlength; k++){
-      var id = menudata.list[sid][k];
+    for ( var k = 0; k < menudata.list[sid].length; k++){
+      var isbn = menudata.list[sid][k];
       // menudata og booktable har data fra forskellige kilder
-      var e = booktable[id];
+      var e = booktable[isbn];
       if(e) {
-        s += '<li id="isbn_' + id + '"><img src="' + imagefolder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
+        current_banner.push(isbn)
+        s += '<li id="isbn_' + isbn + '"><img src="' + imagefolder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
       }
+      if(current_banner.length >= maxImagesInList) break;
     }
 
     var el = document.createElement('ul');
@@ -53,7 +51,7 @@ function show_banner (sid) {
     $('.imagebanner').html(el);
 
     // tildel click-funktion
-    $.each( menudata.list[sid].slice(0, listlength), function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
+    $.each( current_banner, function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
 
     // opret carousel - animation http://jqueryui.com/effect/#easing
     carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 800, 'easing':   'easeOutExpo'  } });
