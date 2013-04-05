@@ -242,9 +242,8 @@ input.ui-widget-content { top: 25%; }
   padding:30px 120px 30px 120px;
   position: relative;
 }
-
 .imagebanner-left,
-.imagebanner-right { position: absolute; top: 45%; z-index: 200; }
+.imagebanner-right { position: absolute; top: 50%; height: 124px; margin-top: -62px; z-index: 200; }
 
 .imagebanner-left img,
 .imagebanner-right img { max-width: 100%; }

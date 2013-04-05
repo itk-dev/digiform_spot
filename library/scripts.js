@@ -84,7 +84,6 @@ function banner_recalculate() {
   var banner_height = $('.wrapper').outerHeight() - $('.body-header').outerHeight() - $('#menucontainer').outerHeight();
   var banner_padding = Math.floor(( banner_height - new_banner_height ) /2 );
   $('#imagecontainer').css( { 'padding-top' : banner_padding, 'padding-bottom' : banner_padding });
-  
 }
 
 function create_events() {
