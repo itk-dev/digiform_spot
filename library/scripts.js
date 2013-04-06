@@ -126,7 +126,7 @@ function create_menu(){
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
   $.each( spotdata.list, function( key, value ) { $('.menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key); return false} ) });
-  $('.menu_nolink' ).click( function() { $('#menu').menu("collapseAll", null, true); return false });
+  $('.menu_nolink' ).click( function() { return false });
 }
 
 function show_popupbox(isbn) {
