@@ -10,6 +10,8 @@ var max_image_height = 500;
 var image_border = 3;
 var space_between_images = 0.20; // procent
 var number_of_images = 3;
+var spotdatatype = 'ebog';
+
 
 Array.prototype.shuffle = function () {
   for (var i = this.length - 1; i > 0; i--) {
@@ -25,15 +27,14 @@ function show_banner (sid) {
     var current_banner; // maybe global variable later
     
     // bland listen af numre
-    menudata.list[sid].shuffle();
+    spotdata.list[sid].shuffle();
 
     // create banner-html
     current_banner = []
     var s = '';
-    for ( var k = 0; k < menudata.list[sid].length; k++){
-      var isbn = menudata.list[sid][k];
-      // menudata og booktable har data fra forskellige kilder
-      var e = booktable[isbn];
+    for ( var k = 0; k < spotdata.list[sid].length; k++){
+      var isbn = spotdata.list[sid][k];
+      var e = spotdata.isbn[isbn];
       if(e) {
         current_banner.push(isbn)
         s += '<li id="isbn_' + isbn + '"><img src="' + imagefolder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
@@ -57,7 +58,7 @@ function show_banner (sid) {
     carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 800, 'easing':   'easeOutExpo'  } });
 
     // $('.imagebanner').delegate('li', 'itemfirstout.jcarousel', function(event, carousel) {
-        // console.log( booktable[$(this).attr('id').slice(5)].t );
+        // console.log( ...[$(this).attr('id').slice(5)].t );
     // });
     banner_recalculate();
 }
@@ -115,13 +116,13 @@ function create_menu(){
   var make_item = function(ele){ return '<a href="#" class="menu_' + ( ele.sid ? ele.sid : 'nolink' ) + '">'+ ele.label +'</a>'; }
 
   var s = '<ul id="menu">'
-  for ( var i = 0; i < menudata.menu.length; i++) {
-    s += '<li>' + make_item( menudata.menu[i][0] );
+  for ( var i = 0; i < spotdata.menu.length; i++) {
+    s += '<li>' + make_item( spotdata.menu[i][0] );
 
-    if ( menudata.menu[i].length > 1 ) {
+    if ( spotdata.menu[i].length > 1 ) {
       s += '<ul>'
-      for ( var j = 1; j < menudata.menu[i].length; j++) {
-        s += '<li class="sub">' + make_item( menudata.menu[i][j] ) + '</li>';
+      for ( var j = 1; j < spotdata.menu[i].length; j++) {
+        s += '<li class="sub">' + make_item( spotdata.menu[i][j] ) + '</li>';
       }
       s += '</ul>'
     }
@@ -132,7 +133,7 @@ function create_menu(){
   $('#menucontainer').html(s);
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
-  $.each( menudata.list, function( key, value ) { $('.menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key); return false} ) });
+  $.each( spotdata.list, function( key, value ) { $('.menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key); return false} ) });
   $('.menu_nolink' ).click( function() { return false });
 }
 
@@ -143,16 +144,16 @@ function show_popupbox(isbn) {
   $('input:text').val('');
 
   //
-  if (booktable[isbn].d == null) {
-    booktable[isbn].d = '';
+  if (spotdata.isbn[isbn].d == null) {
+    spotdata.isbn[isbn].d = '';
   }
 
-  $('#bookdata').html( '<div><h3>' + booktable[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + booktable[isbn].i + '" />' + booktable[isbn].d + '</div>');
+  $('#bookdata').html( '<div><h3>' + spotdata.isbn[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + spotdata.isbn[isbn].i + '" />' + spotdata.isbn[isbn].d + '</div>');
 
   // gem values i formen
   $('#isbn').val(isbn);
-  $('#titel').val(booktable[isbn].t);
-  $('#type').val(booktable[isbn].s);
+  $('#titel').val(spotdata.isbn[isbn].t);
+  $('#type').val(spotdatatype);
 
     // vis boksen (ifald den tidligere er fadeout
   $('#popup').show();  // hide efter submit 4 sek
@@ -192,7 +193,7 @@ $(document).ready(function(){
   create_menu();
 
   // imagebanner
-  show_banner(menudata.first);
+  show_banner(spotdata.first);
 
   // initialiser evetns
   create_events();
