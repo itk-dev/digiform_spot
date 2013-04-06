@@ -10,7 +10,8 @@ var myConfig = {
   max_image_height : 500,
   image_border : 3,
   space_between_images : 0.20, // procent
-  number_of_images : 3
+  number_of_images : 3,
+  prefix : 'isbn_'
 };
 
 Array.prototype.shuffle = function () {
@@ -24,23 +25,17 @@ Array.prototype.shuffle = function () {
 }
 
 function show_banner (sid) {
-    var current_banner; // maybe global variable later
-    
+
     // bland listen af numre
     spotdata.list[sid].shuffle();
 
     // create banner-html
-    current_banner = []
     var s = '';
-    for ( var k = 0; k < spotdata.list[sid].length; k++){
-      var isbn = spotdata.list[sid][k];
+    $.each( spotdata.list[sid], function( key, isbn ) {
       var e = spotdata.isbn[isbn];
-      if(e) {
-        current_banner.push(isbn)
-        s += '<li id="isbn_' + isbn + '"><img src="' + myConfig.folder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
-      }
-      if(current_banner.length >= myConfig.maxImagesInList) break;
-    }
+      s += '<li id="' + myConfig.prefix + isbn + '"><img src="' + myConfig.folder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
+      if ( key >= myConfig.maxImagesInList - 1) return false;
+    });
 
     var el = document.createElement('ul');
     $(el).html(s);
@@ -51,15 +46,9 @@ function show_banner (sid) {
     // overfør data
     $('.imagebanner').html(el);
 
-    // tildel click-funktion
-    $.each( current_banner, function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
-
     // opret carousel - animation http://jqueryui.com/effect/#easing
     carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 1000, 'easing':   'easeInOutCubic'  } });
 
-    // $('.imagebanner').delegate('li', 'itemfirstout.jcarousel', function(event, carousel) {
-        // console.log( ...[$(this).attr('id').slice(5)].t );
-    // });
     banner_recalculate();
 }
 
@@ -108,6 +97,9 @@ function create_events() {
 
     // resize will trigger new size of banner
     $(window).on('resize', banner_recalculate);
+
+    // click on li-elements should trigger popup
+    $(".imagebanner").on("click", "li", function(event){ show_popupbox($(this).attr('id').slice(myConfig.prefix.length));return false; });
 
 }
 
