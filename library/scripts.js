@@ -1,17 +1,17 @@
 
-var imagefolder='http://images.spot.ereolen.dk/books/';
-
 var idleTime = 0;
 var carouselObj;
-var maxImagesInList = 75;
-
-var max_image_width = 330;
-var max_image_height = 500;
-var image_border = 3;
-var space_between_images = 0.20; // procent
-var number_of_images = 3;
 var spotdatatype = 'ebog';
 
+var myConfig = {
+  folder : 'http://images.spot.ereolen.dk/books/',
+  maxImagesInList : 75,
+  max_image_width : 330,
+  max_image_height : 500,
+  image_border : 3,
+  space_between_images : 0.20, // procent
+  number_of_images : 3
+};
 
 Array.prototype.shuffle = function () {
   for (var i = this.length - 1; i > 0; i--) {
@@ -37,9 +37,9 @@ function show_banner (sid) {
       var e = spotdata.isbn[isbn];
       if(e) {
         current_banner.push(isbn)
-        s += '<li id="isbn_' + isbn + '"><img src="' + imagefolder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
+        s += '<li id="isbn_' + isbn + '"><img src="' + myConfig.folder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
       }
-      if(current_banner.length >= maxImagesInList) break;
+      if(current_banner.length >= myConfig.maxImagesInList) break;
     }
 
     var el = document.createElement('ul');
@@ -67,15 +67,15 @@ function banner_recalculate() {
   // setting the height/width/margin of images, padding of the image container when resizing/new search og initialize
 
   var banner_width = $('.imagebanner').outerWidth(true);
-  var new_width = banner_width / number_of_images;
+  var new_width = banner_width / myConfig.number_of_images;
 
-  var new_image_margin = Math.floor( new_width * space_between_images );
+  var new_image_margin = Math.floor( new_width * myConfig.space_between_images );
   var new_image_width = Math.floor( new_width - new_image_margin )
-  var new_image_height =  Math.floor( new_image_width * max_image_height / max_image_width )
+  var new_image_height =  Math.floor( new_image_width * myConfig.max_image_height / myConfig.max_image_width )
 
-  var new_banner_width = number_of_images * ( new_image_width + 2 * image_border ) + ( number_of_images -1 ) * new_image_margin
+  var new_banner_width = myConfig.number_of_images * ( new_image_width + 2 * myConfig.image_border ) + ( myConfig.number_of_images -1 ) * new_image_margin
   var new_banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
-  var new_banner_height = new_image_height + 2 * image_border
+  var new_banner_height = new_image_height + 2 * myConfig.image_border
 
   $('.imagebanner img').css( { 'margin-right' : new_image_margin, 'width' : new_image_width, 'height' : new_image_height } );
   $('.imagebanner').css( { 'height' : new_banner_height, 'margin-left' : new_banner_margin, 'margin-right' : new_banner_margin } );
@@ -148,7 +148,7 @@ function show_popupbox(isbn) {
     spotdata.isbn[isbn].d = '';
   }
 
-  $('#bookdata').html( '<div><h3>' + spotdata.isbn[isbn].t + '</h3><img class="popup-image" src="' + imagefolder + spotdata.isbn[isbn].i + '" />' + spotdata.isbn[isbn].d + '</div>');
+  $('#bookdata').html( '<div><h3>' + spotdata.isbn[isbn].t + '</h3><img class="popup-image" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" />' + spotdata.isbn[isbn].d + '</div>');
 
   // gem values i formen
   $('#isbn').val(isbn);
