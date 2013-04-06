@@ -55,7 +55,7 @@ function show_banner (sid) {
     $.each( current_banner, function( key, isbn ) { $('#isbn_' + isbn).click( function() { show_popupbox(isbn);return false;} ) });
 
     // opret carousel - animation http://jqueryui.com/effect/#easing
-    carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 800, 'easing':   'easeOutExpo'  } });
+    carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 1000, 'easing':   'easeInOutCubic'  } });
 
     // $('.imagebanner').delegate('li', 'itemfirstout.jcarousel', function(event, carousel) {
         // console.log( ...[$(this).attr('id').slice(5)].t );
@@ -87,8 +87,8 @@ function banner_recalculate() {
 
 function create_events() {
 
-    $('.imagebanner-left').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '-=1'); return false; });
-    $('.imagebanner-right').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '+=1'); return false; });
+    $('.imagebanner-left').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '-=3'); return false; });
+    $('.imagebanner-right').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '+=3'); return false; });
 
     // swipe
     $("body").touchwipe({
@@ -134,7 +134,7 @@ function create_menu(){
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
   $.each( spotdata.list, function( key, value ) { $('.menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key); return false} ) });
-  $('.menu_nolink' ).click( function() { return false });
+  $('.menu_nolink' ).click( function() { $('#menu').menu("collapseAll", null, true); return false });
 }
 
 function show_popupbox(isbn) {
