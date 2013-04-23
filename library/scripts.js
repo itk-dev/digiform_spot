@@ -33,8 +33,7 @@ function show_banner (sid) {
     // create banner-html
     var s = '';
     $.each( spotdata.list[sid], function( key, isbn ) {
-      var e = spotdata.isbn[isbn];
-      s += '<li id="' + myConfig.prefix + isbn + '"><img src="' + myConfig.folder + e.i + '" width="' + e.w + '" height="' + e.h + '" alt="' + e.t + '" /></li>'
+      s += '<li><img data-isbn="' + isbn + '" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'      
       if ( key >= myConfig.maxImagesInList - 1) return false;
     });
 
@@ -103,7 +102,7 @@ function create_events() {
     $(window).on('resize', banner_recalculate);
 
     // click on li-elements should trigger popup
-    $(".imagebanner").on("click", "li", function(event){ show_popupbox($(this).attr('id').slice(myConfig.prefix.length));return false; });
+    $(".imagebanner").on("click", "img", function(event){ show_popupbox($(this).data('isbn'));return false; });
 
 }
 
