@@ -1,3 +1,4 @@
+// ITK, Aarhus Kommunes Biblioteker, 2013
 
 var idleTime = 0;
 var carouselObj;
@@ -19,6 +20,8 @@ var myConfig = {
   animation : 1000
 };
 
+var SET_OF_IMAGES = 3; // the visible set og one before/after
+
 Array.prototype.shuffle = function () {
   for (var i = this.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -31,6 +34,9 @@ Array.prototype.shuffle = function () {
 
 function show_banner (sid) {
 
+    // handle nearly empty lists
+    if ( spotdata.list[sid].length < SET_OF_IMAGES * myConfig.number_of_images ) return;
+
     // bland listen af numre
     spotdata.list[sid].shuffle();
 
@@ -39,7 +45,7 @@ function show_banner (sid) {
     $.each( spotdata.list[sid], function( key, isbn ) {
 
       s += '<li><img id="' + myConfig.id_prefix_images + key + '" data-isbn="' + isbn + '" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'
-      if ( key >= 3 * myConfig.number_of_images - 1) return false;
+      if ( key >= SET_OF_IMAGES * myConfig.number_of_images - 1) return false;
     });
 
     var el = document.createElement('ul');
@@ -104,7 +110,7 @@ function update_li_content(offset){
   carousel_pointer += offset;
 
   var list_id = myConfig.number_of_images * modulo( carousel_pointer+offset, carousel_max_pointer)
-  var set_id = myConfig.number_of_images * modulo( carousel_pointer+offset, 3)
+  var set_id = myConfig.number_of_images * modulo( carousel_pointer+offset, SET_OF_IMAGES)
 
   for ( i=0; i < myConfig.number_of_images; i++) {
     var isbn = spotdata.list[carousel_current_sid][list_id+i]
