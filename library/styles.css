@@ -243,14 +243,10 @@ input.ui-widget-content { top: 25%; }
   position: relative;
 }
 .imagebanner-left,
-.imagebanner-right { position: absolute; top: 50%; height: 124px; margin-top: -62px; z-index: 200; }
+.imagebanner-right { position: absolute; top: 50%; height: 124px; margin-top: -62px; z-index: 200; cursor: pointer; }
 
-.imagebanner-left img,
-.imagebanner-right img { max-width: 100%; }
-
-.imagebanner-left { left: 20px; cursor: pointer; }
-
-.imagebanner-right { right: 20px; cursor: pointer; }
+.imagebanner-left { left: 20px; }
+.imagebanner-right { right: 20px; }
 
 .imagebanner {
   position: relative;
@@ -259,7 +255,7 @@ input.ui-widget-content { top: 25%; }
 }
 
 .imagebanner ul {
-  width: 40000px;
+  width: 6000px;
   position: absolute;
   list-style: none;
   margin: 0;

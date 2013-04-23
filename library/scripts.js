@@ -1,19 +1,27 @@
+// ITK, Aarhus Kommunes Biblioteker, 2013
 
 var idleTime = 0;
 var carouselObj;
 var spotdatatype = 'ebog';
 
+var carousel_pointer;
+var carousel_current_sid;
+var carousel_max_pointer;
+var carousel_scroll_in_action;
+
 var myConfig = {
   folder : 'http://images.spot.ereolen.dk/books/',
-  maxImagesInList : 75,
   max_image_width : 330,
   max_image_height : 500,
-  image_border : 3,
+  image_border : 3, // pixels
   space_between_images : 0.20, // procent
-  number_of_images : 3,
-  animation : 1000,
-  prefix : 'isbn_'
+  number_of_images : 3, // visible
+  id_prefix_images : 'imb', // some unique chars
+  animation : 1000, 
+  opacity : 0.8
 };
+
+var SET_OF_IMAGES = 3; // the visible set og one before/after
 
 Array.prototype.shuffle = function () {
   for (var i = this.length - 1; i > 0; i--) {
@@ -27,14 +35,18 @@ Array.prototype.shuffle = function () {
 
 function show_banner (sid) {
 
+    // handle nearly empty lists
+    if ( spotdata.list[sid].length < SET_OF_IMAGES * myConfig.number_of_images ) return;
+
     // bland listen af numre
     spotdata.list[sid].shuffle();
 
     // create banner-html
     var s = '';
     $.each( spotdata.list[sid], function( key, isbn ) {
-      s += '<li><img data-isbn="' + isbn + '" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'      
-      if ( key >= myConfig.maxImagesInList - 1) return false;
+
+      s += '<li><img id="' + myConfig.id_prefix_images + key + '" data-isbn="' + isbn + '" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'
+      if ( key >= SET_OF_IMAGES * myConfig.number_of_images - 1) return false;
     });
 
     var el = document.createElement('ul');
@@ -48,6 +60,16 @@ function show_banner (sid) {
 
     // opret carousel - animation http://jqueryui.com/effect/#easing
     carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
+
+    // initialiser pointer
+    carousel_max_pointer = Math.floor( spotdata.list[sid].length / myConfig.number_of_images );
+    carousel_current_sid = sid;
+    
+    // set the last set of images to the last images in the total list
+    carousel_pointer = 1;
+    update_li_content(-1);
+
+    carousel_scroll_in_action = 0;
 
     banner_recalculate();
 }
@@ -77,10 +99,45 @@ function banner_recalculate(onlyImg) {
   $('#imagecontainer').css( { 'padding-top' : banner_padding, 'padding-bottom' : banner_padding });
 }
 
+function modulo(a,b) {
+  // helper function - handle negative numbers
+  var res = a % b;
+  return res < 0 ? res + b : res;
+}
+
+function update_li_content(offset){
+  // update one of the 3 set of images (before, current, next)
+
+  carousel_pointer += offset;
+
+  var list_id = myConfig.number_of_images * modulo( carousel_pointer+offset, carousel_max_pointer)
+  var set_id = myConfig.number_of_images * modulo( carousel_pointer+offset, SET_OF_IMAGES)
+
+  for ( i=0; i < myConfig.number_of_images; i++) {
+    var isbn = spotdata.list[carousel_current_sid][list_id+i]
+    var src  = myConfig.folder + spotdata.isbn[isbn].i
+    $('#' + myConfig.id_prefix_images + (set_id+i)).attr('src', src ).data('isbn', isbn);
+  }
+}
+
+function scroll(evnt){
+  idleTime=0;
+  if(!carousel_scroll_in_action) {
+     carousel_scroll_in_action = 1;
+     $('.navbutton').css('opacity', myConfig.opacity);
+     update_li_content(evnt.data.offset);
+
+     var offset = ( evnt.data.offset > 0 ? '+=' : '-=' ) + myConfig.number_of_images;
+     $('.imagebanner').jcarousel('scroll', offset,  true, function() { carousel_scroll_in_action = 0; $('.navbutton').css('opacity', 1); } )
+  }
+  return false;
+}
+
 function create_events() {
 
-    $('.imagebanner-left').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '-=3'); return false; });
-    $('.imagebanner-right').click(function() { idleTime=0; $('.imagebanner').jcarousel('scroll', '+=3'); return false; });
+   // navi-buttons
+   $('.imagebanner-left').click( { offset: -1 }, scroll);
+   $('.imagebanner-right').click( { offset: 1 }, scroll);
 
     // swipe
     $("body").touchwipe({
@@ -93,6 +150,9 @@ function create_events() {
            preventDefaultEvents: true
       });
 
+    // pile-tasterne
+    $("body").on('keyup', function (e) { if (event.which == 39) { $('.imagebanner-right').click()} else if (event.which == 37) { $('.imagebanner-left').click()} });
+
     // inaktiv-checkeren...
     setInterval(function() { idleTime+= 5; if(idleTime>10) { $('.imagebanner-right').click();} }, 5000);
     $("body").on('mousemove', function (e) { idleTime = 0; });
@@ -101,7 +161,7 @@ function create_events() {
     // resize will trigger new size of banner
     $(window).on('resize', banner_recalculate);
 
-    // click on li-elements should trigger popup
+    // click on img-elements should trigger popup
     $(".imagebanner").on("click", "img", function(event){ show_popupbox($(this).data('isbn'));return false; });
 
 }
