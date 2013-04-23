@@ -11,6 +11,7 @@ var myConfig = {
   image_border : 3,
   space_between_images : 0.20, // procent
   number_of_images : 3,
+  animation : 1000,
   prefix : 'isbn_'
 };
 
@@ -47,22 +48,25 @@ function show_banner (sid) {
     $('.imagebanner').html(el);
 
     // opret carousel - animation http://jqueryui.com/effect/#easing
-    carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular', 'animation': { 'duration': 1000, 'easing':   'easeInOutCubic'  } });
+    carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
 
     banner_recalculate();
 }
 
-function banner_recalculate() {
-  // setting the height/width/margin of images, padding of the image container when resizing/new search og initialize
+function banner_recalculate(onlyImg) {
+  // the banner_width = (width+border) * number_of_images + (margin between images) * ( number_of_images - 1 )
+  // margin between images = (some factor) * (width+border)
+  // calculate width...
 
   var banner_width = $('.imagebanner').outerWidth(true);
-  var new_width = banner_width / myConfig.number_of_images;
 
-  var new_image_margin = Math.floor( new_width * myConfig.space_between_images );
-  var new_image_width = Math.floor( new_width - new_image_margin )
+  var new_image_width_and_border = Math.floor( banner_width / ( myConfig.number_of_images +  myConfig.space_between_images * (myConfig.number_of_images -1 ) ) )
+  var new_image_width = new_image_width_and_border - 2 * myConfig.image_border
+  var new_image_margin = Math.floor( myConfig.space_between_images * new_image_width_and_border )
+
   var new_image_height =  Math.floor( new_image_width * myConfig.max_image_height / myConfig.max_image_width )
 
-  var new_banner_width = myConfig.number_of_images * ( new_image_width + 2 * myConfig.image_border ) + ( myConfig.number_of_images -1 ) * new_image_margin
+  var new_banner_width = myConfig.number_of_images * new_image_width_and_border + ( myConfig.number_of_images -1 ) * new_image_margin
   var new_banner_margin = Math.floor(( banner_width - new_banner_width ) / 2);
   var new_banner_height = new_image_height + 2 * myConfig.image_border
 
