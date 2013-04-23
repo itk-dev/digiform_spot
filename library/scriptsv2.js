@@ -17,7 +17,8 @@ var myConfig = {
   space_between_images : 0.20, // procent
   number_of_images : 3, // visible
   id_prefix_images : 'imb', // some unique chars
-  animation : 1000
+  animation : 1000, 
+  opacity : 0.8
 };
 
 var SET_OF_IMAGES = 3; // the visible set og one before/after
@@ -123,7 +124,7 @@ function scroll(evnt){
   idleTime=0;
   if(!carousel_scroll_in_action) {
      carousel_scroll_in_action = 1;
-     $('.navbutton').css('opacity', 0.5);
+     $('.navbutton').css('opacity', myConfig.opacity);
      update_li_content(evnt.data.offset);
 
      var offset = ( evnt.data.offset > 0 ? '+=' : '-=' ) + myConfig.number_of_images;
