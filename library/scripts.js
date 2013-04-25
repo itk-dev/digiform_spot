@@ -1,13 +1,8 @@
 // ITK, Aarhus Kommunes Biblioteker, 2013
 
-var idleTime = 0;
-var carouselObj;
 var spotdatatype = 'ebog';
 
-var carousel_pointer;
-var carousel_current_sid;
-var carousel_max_pointer;
-var carousel_scroll_in_action;
+var carousel = { };
 
 var myConfig = {
   folder : 'http://images.spot.ereolen.dk/books/',
@@ -53,23 +48,23 @@ function show_banner (sid) {
     $(el).html(s);
 
     // slet tidligere carousel - er det nødvendigt?
-    if(carouselObj) $('.imagebanner').jcarousel('destroy');
+    if(carousel.obj) $('.imagebanner').jcarousel('destroy');
 
     // overfør data
     $('.imagebanner').html(el);
 
     // opret carousel - animation http://jqueryui.com/effect/#easing
-    carouselObj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
+    carousel.obj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
 
     // initialiser pointer
-    carousel_max_pointer = Math.floor( spotdata.list[sid].length / myConfig.number_of_images );
-    carousel_current_sid = sid;
+    carousel.max_pointer = Math.floor( spotdata.list[sid].length / myConfig.number_of_images );
+    carousel.current_sid = sid;
     
     // set the last set of images to the last images in the total list
-    carousel_pointer = 1;
+    carousel.pointer = 1;
     update_li_content(-1);
 
-    carousel_scroll_in_action = 0;
+    carousel.scroll_in_action = 0;
 
     banner_recalculate();
 }
@@ -108,27 +103,27 @@ function modulo(a,b) {
 function update_li_content(offset){
   // update one of the 3 set of images (before, current, next)
 
-  carousel_pointer += offset;
+  carousel.pointer += offset;
 
-  var list_id = myConfig.number_of_images * modulo( carousel_pointer+offset, carousel_max_pointer)
-  var set_id = myConfig.number_of_images * modulo( carousel_pointer+offset, SET_OF_IMAGES)
+  var list_id = myConfig.number_of_images * modulo( carousel.pointer+offset, carousel.max_pointer)
+  var set_id = myConfig.number_of_images * modulo( carousel.pointer+offset, SET_OF_IMAGES)
 
   for ( i=0; i < myConfig.number_of_images; i++) {
-    var isbn = spotdata.list[carousel_current_sid][list_id+i]
+    var isbn = spotdata.list[carousel.current_sid][list_id+i]
     var src  = myConfig.folder + spotdata.isbn[isbn].i
     $('#' + myConfig.id_prefix_images + (set_id+i)).attr('src', src ).data('isbn', isbn);
   }
 }
 
 function scroll(evnt){
-  idleTime=0;
-  if(!carousel_scroll_in_action) {
-     carousel_scroll_in_action = 1;
+  carousel.idleTime=0;
+  if(!carousel.scroll_in_action) {
+     carousel.scroll_in_action = 1;
      $('.navbutton').css('opacity', myConfig.opacity);
      update_li_content(evnt.data.offset);
 
-     var offset = ( evnt.data.offset > 0 ? '+=' : '-=' ) + myConfig.number_of_images;
-     $('.imagebanner').jcarousel('scroll', offset,  true, function() { carousel_scroll_in_action = 0; $('.navbutton').css('opacity', 1); } )
+     var relative_offset = ( evnt.data.offset > 0 ? '+=' : '-=' ) + myConfig.number_of_images;
+     $('.imagebanner').jcarousel('scroll', relative_offset,  true, function() { carousel.scroll_in_action = 0; $('.navbutton').css('opacity', 1); } )
   }
   return false;
 }
@@ -154,9 +149,10 @@ function create_events() {
     $("body").on('keyup', function (e) { if (event.which == 39) { $('.imagebanner-right').click()} else if (event.which == 37) { $('.imagebanner-left').click()} });
 
     // inaktiv-checkeren...
-    setInterval(function() { idleTime+= 5; if(idleTime>10) { $('.imagebanner-right').click();} }, 5000);
-    $("body").on('mousemove', function (e) { idleTime = 0; });
-    $("body").on('keypress',  function (e) { idleTime = 0; });
+    carousel.idleTime = 0;
+    setInterval(function() { carousel.idleTime+= 5; if(carousel.idleTime>10) { $('.imagebanner-right').click();} }, 5000);
+    $("body").on('mousemove', function (e) { carousel.idleTime = 0; });
+    $("body").on('keypress',  function (e) { carousel.idleTime = 0; });
 
     // resize will trigger new size of banner
     $(window).on('resize', banner_recalculate);
