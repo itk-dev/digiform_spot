@@ -13,8 +13,8 @@ var myConfig = {
   visible_images : 3, // synlige
   set_of_images: 3, // de synlige sæt, før/aktivt/efter
   id_prefix_images : 'imb', // tilfældige unikke tegn
-  animation : 1000,
-  opacity : 0.8
+  animation : 1000, // tid i ms
+  opacity : 0.8 // opacity til knapper når animation er aktiv
 };
 
 Array.prototype.shuffle = function () {
@@ -29,18 +29,25 @@ Array.prototype.shuffle = function () {
 
 function show_banner (sid) {
 
-    // håndtér mindre lister
-    if ( spotdata.list[sid].length < myConfig.set_of_images * myConfig.visible_images ) carousel.small_list = true;
-
     // bland listen af numre
     spotdata.list[sid].shuffle();
 
+    // håndter lister af forskellig længde
+    var listlength;
+    if ( spotdata.list[sid].length < myConfig.set_of_images * myConfig.visible_images ) {
+      listlength = spotdata.list[sid].length;
+      carousel.small_list = true;
+    } else {
+      listlength = myConfig.set_of_images * myConfig.visible_images;
+      carousel.small_list = false;
+    }
+
     // dan banner-html
     var s = '';
-    $.each( spotdata.list[sid], function( key, isbn ) {
-      s += '<li><img id="' + myConfig.id_prefix_images + key + '" data-isbn="' + isbn + '" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'
-      if ( key >= myConfig.set_of_images * myConfig.visible_images - 1) return false;
-    });
+    for ( i = 0; i < listlength; i++) {
+       var isbn = spotdata.list[sid][i];
+       s += '<li><img id="' + myConfig.id_prefix_images + i + '" data-isbn="' + isbn + '" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'
+    };
 
     var el = document.createElement('ul');
     $(el).html(s);
