@@ -29,50 +29,51 @@ Array.prototype.shuffle = function () {
 
 function create_banner (current_list) {
 
-    // bland listen af numre
-    current_list.shuffle();
 
-    // håndter lister af forskellig længde
-    var listlength;
-    if ( current_list.length < myConfig.set_of_images * myConfig.visible_images ) {
-      listlength = current_list.length;
-      carousel.small_list = true;
-    } else {
-      listlength = myConfig.set_of_images * myConfig.visible_images;
-      carousel.small_list = false;
-    }
-    //console.log(current_list.length)
+  // bland listen af numre
+  current_list.shuffle();
 
-    // dan banner-html
-    var s = '';
-    for ( i = 0; i < listlength; i++) {
-       s += create_li_element (i, current_list[i])
-    };
+  // håndter lister af forskellig længde
+  var listlength;
+  if ( current_list.length < myConfig.set_of_images * myConfig.visible_images ) {
+    listlength = current_list.length;
+    carousel.small_list = true;
+  } else {
+    listlength = myConfig.set_of_images * myConfig.visible_images;
+    carousel.small_list = false;
+  }
+  //console.log(current_list.length)
 
-    var el = document.createElement('ul');
-    $(el).html(s);
+  // dan banner-html
+  var s = '';
+  for ( i = 0; i < listlength; i++) {
+     s += create_li_element (i, current_list[i])
+  };
 
-    // slet tidligere carousel
-    if(carousel.obj) $('.imagebanner').jcarousel('destroy');
+  var el = document.createElement('ul');
+  $(el).html(s);
 
-    // overfør data
-    $('.imagebanner').html(el);
+  // slet tidligere carousel
+  if(carousel.obj) $('.imagebanner').jcarousel('destroy');
 
-    // opret carousel - animation http://jqueryui.com/effect/#easing
-    carousel.obj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
+  // overfør data
+  $('.imagebanner').html(el);
 
-    // initialiser pointer
-    carousel.max_pointer = Math.floor( current_list.length / myConfig.visible_images );
-    carousel.current_list = current_list;
+  // opret carousel - animation http://jqueryui.com/effect/#easing
+  carousel.obj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
 
-    // det sidste sæt skal indeholde de sidste billeder i listen - dette trick ordner dette
-    carousel.pointer = 1;
-    update_banner(-1);
+  // initialiser pointer
+  carousel.max_pointer = Math.floor( current_list.length / myConfig.visible_images );
+  carousel.current_list = current_list;
 
-    carousel.scroll_in_action = false;
+  // det sidste sæt skal indeholde de sidste billeder i listen - dette trick ordner dette
+  carousel.pointer = 1;
+  update_banner(-1);
 
-    // opdater størrelser i css
-    banner_recalculate();
+  carousel.scroll_in_action = false;
+
+  // opdater størrelser i css
+  banner_recalculate();
 }
 
 function modulo(a,b) {
