@@ -28,7 +28,8 @@ Array.prototype.shuffle = function () {
 }
 
 function create_banner (current_list) {
-
+  // ud fra den aktuelle liste oprettes banner med et mindre antal billeder (som løbende skiftes)
+  // den tidligere carussel fjernes og den nye oprettes
 
   // bland listen af numre
   current_list.shuffle();
@@ -83,7 +84,7 @@ function modulo(a,b) {
 }
 
 function update_banner(offset){
-  // håndterer visningen af den lange liste
+  // håndterer visningen af den lange liste ved at skifte billederne løbende
 
   // skip hvis listen er lille
   if(carousel.small_list) return;
@@ -125,7 +126,7 @@ function banner_recalculate(onlyImg) {
 }
 
 function scroll(evnt){
-  // håndter skiftet af billeder
+  // håndter scrol af billeder hvilket dels betyder opdatering af indholdet i banneret og dels selve scrolningen
 
   // karusellen skifter så nulstil idletime
   carousel.idleTime=0;
