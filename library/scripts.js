@@ -27,52 +27,77 @@ Array.prototype.shuffle = function () {
   return this;
 }
 
-function show_banner (sid) {
+function create_banner (current_list) {
+  // ud fra den aktuelle liste oprettes banner med et mindre antal billeder (som løbende skiftes)
+  // den tidligere carussel fjernes og den nye oprettes
 
-    // bland listen af numre
-    spotdata.list[sid].shuffle();
+  // bland listen af numre
+  current_list.shuffle();
 
-    // håndter lister af forskellig længde
-    var listlength;
-    if ( spotdata.list[sid].length < myConfig.set_of_images * myConfig.visible_images ) {
-      listlength = spotdata.list[sid].length;
-      carousel.small_list = true;
-    } else {
-      listlength = myConfig.set_of_images * myConfig.visible_images;
-      carousel.small_list = false;
-    }
+  // håndter lister af forskellig længde
+  var listlength;
+  if ( current_list.length < myConfig.set_of_images * myConfig.visible_images ) {
+    listlength = current_list.length;
+    carousel.small_list = true;
+  } else {
+    listlength = myConfig.set_of_images * myConfig.visible_images;
+    carousel.small_list = false;
+  }
+  //console.log(current_list.length)
 
-    // dan banner-html
-    var s = '';
-    for ( i = 0; i < listlength; i++) {
-       var isbn = spotdata.list[sid][i];
-       s += '<li><img id="' + myConfig.id_prefix_images + i + '" data-isbn="' + isbn + '" src="' + myConfig.folder + spotdata.isbn[isbn].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'
-    };
+  // dan banner-html
+  var s = '';
+  for ( i = 0; i < listlength; i++) {
+     s += create_li_element (i, current_list[i])
+  };
 
-    var el = document.createElement('ul');
-    $(el).html(s);
+  var el = document.createElement('ul');
+  $(el).html(s);
 
-    // slet tidligere carousel
-    if(carousel.obj) $('.imagebanner').jcarousel('destroy');
+  // slet tidligere carousel
+  if(carousel.obj) $('.imagebanner').jcarousel('destroy');
 
-    // overfør data
-    $('.imagebanner').html(el);
+  // overfør data
+  $('.imagebanner').html(el);
 
-    // opret carousel - animation http://jqueryui.com/effect/#easing
-    carousel.obj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
+  // opret carousel - animation http://jqueryui.com/effect/#easing
+  carousel.obj = $('.imagebanner').jcarousel({ 'wrap': 'circular','animation': { 'duration': myConfig.animation, 'easing':   'easeInOutCubic'  } });
 
-    // initialiser pointer
-    carousel.max_pointer = Math.floor( spotdata.list[sid].length / myConfig.visible_images );
-    carousel.current_sid = sid;
+  // initialiser pointer
+  carousel.max_pointer = Math.floor( current_list.length / myConfig.visible_images );
+  carousel.current_list = current_list;
 
-    // det sidste sæt skal indeholde de sidste billeder i listen - dette trick ordner dette
-    carousel.pointer = 1;
-    update_li_content(-1);
+  // det sidste sæt skal indeholde de sidste billeder i listen - dette trick ordner dette
+  carousel.pointer = 1;
+  update_banner(-1);
 
-    carousel.scroll_in_action = false;
+  carousel.scroll_in_action = false;
 
-    // opdater størrelser i css
-    banner_recalculate();
+  // opdater størrelser i css
+  banner_recalculate();
+}
+
+function modulo(a,b) {
+  // håndterer negative tal (i modsætning til %)
+  var res = a % b;
+  return res < 0 ? res + b : res;
+}
+
+function update_banner(offset){
+  // håndterer visningen af den lange liste ved at skifte billederne løbende
+
+  // skip hvis listen er lille
+  if(carousel.small_list) return;
+
+  carousel.pointer += offset;
+
+  var list_id = myConfig.visible_images * modulo( carousel.pointer+offset, carousel.max_pointer)
+  var set_id = myConfig.visible_images * modulo( carousel.pointer+offset, myConfig.set_of_images)
+
+  // udskift det resp. set med de nye billeder fra listen
+  for ( i=0; i < myConfig.visible_images; i++) {
+    update_li_element(set_id+i, carousel.current_list[list_id+i])
+  }
 }
 
 function banner_recalculate(onlyImg) {
@@ -100,33 +125,8 @@ function banner_recalculate(onlyImg) {
   $('#imagecontainer').css( { 'padding-top' : banner_padding, 'padding-bottom' : banner_padding });
 }
 
-function modulo(a,b) {
-  // håndterer negative tal (i modsætning til %)
-  var res = a % b;
-  return res < 0 ? res + b : res;
-}
-
-function update_li_content(offset){
-  // håndterer visningen af den lange liste
-
-  // skip hvis listen er lille
-  if(carousel.small_list) return;
-
-  carousel.pointer += offset;
-
-  var list_id = myConfig.visible_images * modulo( carousel.pointer+offset, carousel.max_pointer)
-  var set_id = myConfig.visible_images * modulo( carousel.pointer+offset, myConfig.set_of_images)
-
-  // udskift det resp. set med de nye billeder fra listen
-  for ( i=0; i < myConfig.visible_images; i++) {
-    var isbn = spotdata.list[carousel.current_sid][list_id+i]
-    var src  = myConfig.folder + spotdata.isbn[isbn].i
-    $('#' + myConfig.id_prefix_images + (set_id+i)).attr('src', src ).data('isbn', isbn);
-  }
-}
-
 function scroll(evnt){
-  // håndter skiftet af billeder
+  // håndter scrol af billeder hvilket dels betyder opdatering af indholdet i banneret og dels selve scrolningen
 
   // karusellen skifter så nulstil idletime
   carousel.idleTime=0;
@@ -135,7 +135,7 @@ function scroll(evnt){
   if(!carousel.scroll_in_action) {
      carousel.scroll_in_action = true;
      $('.navbutton').css('opacity', myConfig.opacity);
-     update_li_content(evnt.data.offset);
+     update_banner(evnt.data.offset);
 
      var relative_offset = ( evnt.data.offset > 0 ? '+=' : '-=' ) + myConfig.visible_images;
      $('.imagebanner').jcarousel('scroll', relative_offset,  true, function() { carousel.scroll_in_action = false; $('.navbutton').css('opacity', 1); } )
@@ -177,6 +177,16 @@ function create_events() {
 
 }
 
+function create_li_element (key, value) {
+  // opretter li element til brug i banneret
+  return '<li><img id="' + myConfig.id_prefix_images + key + '" data-isbn="' + value + '" src="' + myConfig.folder + spotdata.isbn[value].i + '" width="' + myConfig.max_image_width + '" height="' + myConfig.max_image_height + '" alt="" /></li>'
+}
+
+function update_li_element(key, value){
+  // opdaterer li element i banneret
+  $('#' + myConfig.id_prefix_images + key).attr('src', myConfig.folder + spotdata.isbn[value].i ).data('isbn', value);
+}
+
 function create_menu(){
 
   var make_item = function(ele){ return '<a href="#" class="menu_' + ( ele.sid ? ele.sid : 'nolink' ) + '">'+ ele.label +'</a>'; }
@@ -199,7 +209,7 @@ function create_menu(){
   $('#menucontainer').html(s);
   $('#menu').menu({ icons: { submenu: "ui-icon-blank" }, position: { my: "left top", at: "left bottom" } });
 
-  $.each( spotdata.list, function( key, value ) { $('.menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); show_banner(key); return false} ) });
+  $.each( spotdata.list, function( key, value ) { $('.menu_' + key).click( function() { $('#menu').menu("collapseAll", null, true); create_banner( value ); return false })});
   $('.menu_nolink' ).click( function() { return false });
 }
 
@@ -259,7 +269,7 @@ $(document).ready(function(){
   create_menu();
 
   // imagebanner
-  show_banner(spotdata.first);
+  create_banner(spotdata.list[spotdata.first]);
 
   // initialiser events
   create_events();
