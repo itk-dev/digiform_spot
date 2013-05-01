@@ -13,7 +13,9 @@ var myConfig = {
   set_of_images: 3, // de synlige sæt, før/aktivt/efter
   id_prefix_images : 'imb', // tilfældige unikke tegn
   animation : 1000, // tid i ms
-  opacity : 0.8 // opacity til knapper når animation er aktiv
+  opacity : 0.8, // opacity til knapper når animation er aktiv
+  update_check : 3600*1000, // check hver time
+  update_period : 86400 * 1000 / 2 // reload hver 12. time
 };
 
 Array.prototype.shuffle = function () {
@@ -239,6 +241,14 @@ function show_popupbox(isbn) {
 
 }
 
+function check_updates(){
+  // kører periodevis og reloader hele siden efter fastsat tid
+  var now=(new Date()).getTime();
+  if ( now - carousel.starttime > myConfig.update_period ) {
+    location.reload(true)
+  }
+}
+
 $(document).ready(function(){
 
   // keyboard
@@ -318,4 +328,9 @@ $(document).ready(function(){
         });
       return false;
     });
+
+   // check for updates
+  carousel.starttime = (new Date()).getTime();
+  setInterval(check_updates, myConfig.update_check);
+
 });
