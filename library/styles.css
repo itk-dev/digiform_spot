@@ -210,7 +210,7 @@ input.ui-widget-content { top: 25%; }
 .fancybox-inner {
   overflow: hidden;
 }
-
+/*
 #fancybox-close {
   position: absolute;
   top: -15px;
@@ -222,7 +222,7 @@ input.ui-widget-content { top: 25%; }
   cursor: pointer;
   z-index: 1103;
   display: none;
-}
+}*/
 
 .ui-keyboard{ padding: .3em; }
 .ui-keyboard-button{height: 3em; width: 3em; margin: .1em;}
