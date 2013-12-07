@@ -252,7 +252,7 @@ function check_updates(){
 $(document).ready(function(){
 
   // keyboard
-  $('#email').keyboard({ openOn : '', stayOpen : true,
+  $('#email').keyboard({ openOn : '', autoAccept : true, 
      layout : 'custom',
      customLayout: {
         'default' : [
