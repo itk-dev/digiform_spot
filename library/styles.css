@@ -204,7 +204,7 @@ input.ui-widget-content { top: 25%; }
 
 .fancybox-wrap {
   margin: 0;
-  z-index: 20000;
+  /*z-index: 20000;*/
 }
 
 .fancybox-inner {
