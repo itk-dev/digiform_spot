@@ -162,7 +162,7 @@ function create_events() {
       });
 
     // pile-tasterne
-    $("body").on('keyup', function (e) { if (event.which == 39) { $('.imagebanner-right').click()} else if (event.which == 37) { $('.imagebanner-left').click()} });
+    $("body").on('keyup', function (event) { if (event.which == 39) { $('.imagebanner-right').click()} else if (event.which == 37) { $('.imagebanner-left').click()} });
 
     // inaktiv-checkeren...
     carousel.idleTime = 0;
